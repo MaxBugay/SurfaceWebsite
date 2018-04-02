@@ -9,8 +9,244 @@ and open the template in the editor.
         <title>Tutorial: Selection Slideshow</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="myStyle.css" rel="stylesheet" type="text/css" />
+        <style>
+         .btn1 {
+            background-color: #A2A5AC;
+            border: none;
+            color: #A2A5AC;
+            padding: 16px 16px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Darker background on mouse-over */
+        .btn1:hover {
+            border-color: black;
+            border: 1px solid black;
+        }
+        .btn1:selected {
+            border: 1px solid black;
+        }
+        
+        .btn2 {
+            background-color: #663E3F;
+            border: none;
+            color: #663E3F;
+            padding: 16px 16px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Darker background on mouse-over */
+        .btn2:hover {
+            border-color: black;
+            border: 1px solid black;
+        }
+        .btn3 {
+            background-color: #4D6977;
+            border: none;
+            color: #4D6977;
+            padding: 16px 16px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Darker background on mouse-over */
+        .btn3:hover {
+            border-color: black;
+            border: 1px solid black;
+        }
+        .btn4 {
+            background-color: #B4AAA0;
+            border: none;
+            color: #B4AAA0;
+            padding: 16px 16px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Darker background on mouse-over */
+        .btn4:hover {
+            border-color: black;
+            border: 1px solid black;
+        }
+        
+        .slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            margin: auto;
+            padding: 5px;
+        }
+
+        /* Next & previous buttons */
+        .prev, .next {
+            background-color: darkgrey;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover, .next:hover {
+            background-color: black;
+        }
+
+        /* Caption text */
+        .text {
+            color: #f2f2f2;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* The dots/bullets/indicators */
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active, .dot:hover {
+            background-color: #717171;
+        }
+
+        /* Fading animation */
+        .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 1.5s;
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @-webkit-keyframes fade {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
+
+        @keyframes fade {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
+
+        /* On smaller screens, decrease text size */
+        @media only screen and (max-width: 300px) {
+            .prev, .next,.text {font-size: 11px}
+        }
+</style>
     </head>
+        
     <body>
-        <div>TODO write content</div>
+        <h2>Tutorial: Selection Slideshow</h2>
+        <p>Icon buttons:</p>
+        <button class="btn1"><i class="fa fa-home"></i></button>
+        <button class="btn2"><i class="fa fa-bars"></i></button>
+        <button class="btn3"><i class="fa fa-trash"></i></button>
+        <button class="btn4"><i class="fa fa-close"></i></button>
+        
+        <div class="slideshow-container">
+
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 5</div>
+                <img src="../pics/tutorialpics/Surface-Laptop-Plat1.jpg" style="width:100%">
+                <!--<div class="text">Caption One</div>-->
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 5</div>
+                <img src="../pics/tutorialpics/Surface-Laptop-Plat2.jpg" style="width:100%">
+                <!--<div class="text">Caption Two</div>-->
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 5</div>
+                <img src="../pics/tutorialpics/Surface-Laptop-Plat3.jpg" style="width:100%">
+                <!--div class="text">Caption Three</div>-->
+            </div>
+            
+            <div class="mySlides fade">
+                <div class="numbertext">4 / 5</div>
+                <img src="../pics/tutorialpics/Surface-Laptop-Plat4.jpg" style="width:100%">
+                <!--<div class="text">Caption Four</div>-->
+            </div>
+            
+            <div class="mySlides fade">
+                <div class="numbertext">5 / 5</div>
+                <img src="../pics/tutorialpics/Surface-Laptop-Plat5.jpg" style="width:100%">
+                <!--<div class="text">Caption Five</div>-->
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+        </div>
+        <br>
+
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span> 
+            <span class="dot" onclick="currentSlide(2)"></span> 
+            <span class="dot" onclick="currentSlide(3)"></span> 
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+        </div>
+        <script>
+            var slideIndex = 1;
+            showSlides(slideIndex);
+
+            function plusSlides(n) {
+                showSlides(slideIndex += n);
+            }
+
+            function currentSlide(n) {
+                showSlides(slideIndex = n);
+            }
+
+            function showSlides(n) {
+                var i;
+                var slides = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("dot");
+                if (n > slides.length) {slideIndex = 1}    
+                    if (n < 1) {slideIndex = slides.length}
+                        for (i = 0; i < slides.length; i++) {
+                            slides[i].style.display = "none";  
+                        }
+                        for (i = 0; i < dots.length; i++) {
+                            dots[i].className = dots[i].className.replace(" active", "");
+                        }
+                        slides[slideIndex-1].style.display = "block";  
+                        dots[slideIndex-1].className += " active";
+                 }
+        </script>
     </body>
 </html>
