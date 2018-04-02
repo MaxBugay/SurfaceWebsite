@@ -1,0 +1,401 @@
+<!-- Single Page Design Template -->
+<!DOCTYPE html>
+<html lang="en"><head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <!-- It's good practice for modern web design to include these meta tags  -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Single Page</title>
+
+        <style type="text/css">
+            html, body {
+                margin: 0;  /* remove any default spacing */
+                padding: 0; /* remove any default spacing */
+                min-width: 320px; /* don't want to the page titles to wrap */
+            }
+            h1 { /* "hero style" page titles */
+                font-size: 3.0em;
+                font-family: sans-serif;
+                color: azure;
+                margin-left: 20px;
+                background-color: steelblue;
+                border-radius: 10pt;
+                min-width: 150px;
+                max-width: 10%;
+                padding: 10px;
+            }
+            h2 {
+                text-align: center;
+            }
+            
+            #nav {  /* without this there is space above the nav bar */
+                margin-top: 0px; 
+            }
+            
+            img {
+                height: 50%;
+                width: 50%;
+                text-align: center;
+            }
+
+            .sng-page {
+                min-height: 500px; /* fallout for older browsers */
+                min-height: 100vh;
+
+                /* Dont ask me why, but I was getting a white space between pages 
+                unless I had top and bottom borders, so I provided a 1 pixel border 
+                with color blank with 0 opacity (solidness). */
+                border-bottom: 1px solid rgba(0,0,0,0); 
+                border-top: 1px solid rgba(0,0,0,0); 
+            }
+
+            #footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                z-index: 2;
+                width: 100%;
+                background-color: black;
+                color:#CCCCCC;
+                letter-spacing: 0.1ex;
+                text-align: center;
+                font-weight: bold;
+                font-size: 18px;
+                padding: 12px;
+            }
+            #footer a {
+                text-decoration: none;
+                color:#CCCCCC;
+            }
+            #footer a:hover {
+                color: white;
+            }
+
+            /* colors to differentiate the pages */
+            #home {
+                background-color: azure;
+            } 
+            #info {
+                background-color: lightblue;
+            }
+            #form {
+                background-color: lightsteelblue;
+            }
+
+            #nav {
+                position:fixed;
+                background-color:white;
+                top:0px;
+                right:0px;
+                padding: 10px;
+                font-size:18px;
+                font-weight:bold;
+                z-index:2;
+                margin-right:0px;
+                border-bottom-left-radius: 10px;
+                box-shadow: 2px 2px 2px gray;
+            }
+            #navLinks {
+                display: none; 
+            }
+            #navIcon {
+                width:100px;
+                display: block;
+            }
+
+            body { 
+                margin: 0; padding: 0; /* avoid white line just inside browser window */
+
+                /* set up default text properties - most commonly used */
+                font-family: "Segoe UI", "Segoe UI", serif;
+                font-size: 16px;
+                background-color: azure;
+                line-height: 1.5em;
+            }
+
+            .container {
+                width: 100%;
+                box-sizing: border-box; /* gets rid of horizontal scroll bar, counts padding and border in box size */
+                /* border:thin solid blue; */
+            }
+
+            .pageTitle {
+                padding: 10px 15px; /* 1st is top/bottom, 2nd is left/right */
+                background-color: lightblue;
+                color: black;
+                margin-bottom: -3px; /* cover up white space between title and content */
+                font-size: 1.3em;
+                line-height: 2.5em;
+            }
+
+            .column33 {
+                /* border:thin solid red; */
+                width: 100%;
+                padding: 15px;
+                background-color: lightblue;
+                color: black;
+                margin: 5px 0%;  /* 1st is top/bottom, 2nd is left/right */
+                box-sizing: border-box; /* gets rid of horizontal scroll bar, counts padding and border in box size */
+            }
+            .column50 {
+                    background-color: lightblue;
+                    padding: 5px 15px;
+                    width: 100%;
+                    box-sizing:border-box;
+                    margin: 0px 0.5%;
+                    float: left;
+                }
+
+            /* ------------ Desktop Only Styles --------------- */
+            @media screen and (min-width: 600px) {
+
+                .container {
+                    background-color: lightskyblue;
+                    padding: 0px 15px;
+                }
+
+                .column33 {
+                    background-color: rgba(0,0,0,0);
+                    padding: 5px 15px; /* 1st is top/bottom, 2nd is left/right */
+                    width: 32%;
+                    box-sizing:border-box;
+                    margin: 0px 0.5%;  /* 1st is top/bottom, then left/right. 
+                                       If each element is 32% and has 0.5% on left and right, 
+                                       the total will add up to 99% for three */
+                    float: left;
+                }
+                .column50 {
+                    background-color: lightblue;
+                    padding: 15px;
+                    width: 49%;
+                    box-sizing:border-box;
+                    margin: 0px 0.5%;
+                    float: left;
+                    border-radius: 10pt;
+                }
+                
+                .navLink{
+                    
+                    display:inline;
+                    border:none;
+                    border-right: thin solid gray;
+                }
+                    
+                #navGroup {
+                    display:block;
+                    padding-top: 29px;
+                }
+                #navLinks {
+                    display:block;
+                }
+
+                #navIcon {
+                    display:none;
+                }
+                #nav li {
+                    display:inline;
+                    
+                    margin-left:5px; /* spacing between links of nav bar */
+                }
+
+                .clear {
+                    clear:both;
+                }
+            }
+        </style>
+    </head>
+    <body onresize="resize()">
+
+        <ul id="nav">
+            <div id="navIcon" onclick="iconClicked()">
+                <img src="../pics/menuIconWhite.png"/>
+            </div>
+            <div id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#info">Info</a></li>
+            <li><a href="#form">Form</a></li>
+            <li><a href="../labs.html">Labs</a>
+            </div>
+        </ul>
+
+
+        <!-- Page 1 -->
+        <div id="home" class="sng-page">
+            
+            <h1>Home</h1>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $("h1").mouseenter(function () {
+                        $(this).animate({
+                            opacity: '0.5'
+                            
+                        });
+                    
+                    });
+                    $("h1").mouseleave(function () {
+                        $(this).animate({
+                            opacity: '1.0'
+                            
+                        });
+                });
+            });
+            </script> 
+            <div id="content">
+            <div class="width66Pct">
+
+                <h2 id="header2">Best of Microsoft</h2>
+                <ul>
+                    <li>
+                    Designed by Microsoft, Surface is engineered to deliver the best experience with Office and Windows, and supported by world-class customer care. With the right laptop, you can meet any challenge. See how people like you are working, creating, and changing lives with Surface.
+                    </li>
+                </ul>  
+
+            </div>
+            <div class="width33Pct" >
+
+                
+
+                <br/>
+            </div> 
+
+            <!-- Must stop the floating so that elements below don't float up into here. -->
+            <div class="stopFloat"></div>
+        </div>
+        </div>
+        
+        <!-- Page 2 -->
+        <div id="info" class="sng-page">
+            <h1>Info</h1>
+            
+            <div class="container">
+                <div class="column33">
+                    <h2>Surface Pro</h2> <br> 
+                    <img src="../pics/Surface-Pro.png">
+                    <p>The new Surface Pro is the most versatile laptop. It features 13.5 hours of battery life, a powerful Intel® Core™ processor, the new Alcantara® keyboard in a choice of rich colors, and the next-generation Surface Pen. Now better than ever, the new Surface Pro combines uncompromising mobility with exceptional power and performance.</p>
+                </div>
+
+                <div class="column33">
+                    <h2>Surface Laptop</h2> <br> 
+                    <img src="../pics/Surface-Laptop.png">
+                    <p>Microsoft Surface Laptop is performance made personal. It features the best of Windows and Office, all-day battery life, a stunning screen that responds to your touch, and a choice of four rich tone-on-tone colors, it delivers the perfect balance of portability and performance.</p>
+                </div>
+
+                <div class="column33">
+                    <h2>Surface Book</h2> <br> 
+                    <img src="../pics/Surface-Book.png">
+                    <p>The new Surface Book 2 is built for powerhouse performance. It features up to 17 hours of battery life and the most powerful graphics performance ever from a Surface laptop. Experience up to 4 times more power than before and blazing graphics now come in two sizes: a new 15” or a 13.5” PixelSense™ Display.</p>
+                </div>
+
+                <div class="clear"></div>
+
+            </div> <!-- end container -->
+        </div>
+
+        <!-- Page 3 -->
+        <div id="form" class="sng-page">
+            <h1>Form</h1>
+            <div class="container" style="font-family: sans-serif">
+                <form method="post" action="http://www.temple.edu/cgi-bin/mail?tug77714@temple.edu">
+                    <div class="column50">
+                        What is Your Name? <br>  <input type="text" name="userName" placeholder="plain text input" required="">  <br> <br>
+                        Do you own a Surface? <br>     <input type="radio" name="own" value="Y" required="">   Yes   
+                        <input type="radio" name="own" value="N">    No  <br> <br>
+                        Are you looking to purchase a Surface? <input type="checkbox" name="interest">  <br> <br>
+                        What Surface are you looking to purchase? <br>
+                        <select name="device" required="">
+                            <option value="Pro" selected="selected">Pro</option>
+                            <option value="Lap">Laptop</option>
+                            <option value="Book">Book</option>
+                            <option value="Stud">Studio</option>
+                            <option value="None">Another device</option>
+                        </select> <br> <br>
+                        How old are you?
+                        <input type="number" name="age" min="1" max="200" required="">
+                    </div>
+                    <div class="column50">
+                        Comments or Suggestions? <br>
+                        <textarea name="inputcomments" cols="45" rows="5">Type your comments here</textarea> <br> <br>
+                        <input type="submit" value=" Click Here (to send email) ">
+                        </form>
+                    </div>
+            </div>
+
+        <div id="footer">
+            Max Bugay
+        </div>
+
+        <!-- Jquery -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script>
+
+                function my$(id) {
+                    return document.getElementById(id);
+                }
+
+                function iconClicked() {
+
+                    var navLinks = my$("navLinks");
+                    var navDisplay = getComputedStyle(navLinks).display;
+                    if (navDisplay === "block") {
+                        my$("navLinks").style.display = "none";
+                    } else {
+                        my$("navLinks").style.display = "block";
+                    }
+                    console.log("icon Clicked. navLinks is " + my$("navLinks").style.display);
+                }
+                var navIcon = my$("navIcon");
+                var iconDisplay = getComputedStyle(navIcon).display;
+                var previousIconDisplay = iconDisplay;
+                function resize() {
+                    previousIconDisplay = iconDisplay;
+                    iconDisplay = getComputedStyle(navIcon).display;
+
+                    if (iconDisplay === "none" && previousIconDisplay === "block") {
+                        my$("navLinks").style.display = "block";
+
+                    }
+                    if (iconDisplay === "block" && previousIconDisplay === "none") {
+                        my$("navLinks").style.display = "none";
+                    }
+                }
+
+                $(document).ready(function () {
+
+                    $("h1").mouseenter(function () {
+                        $(this).css("color", "#0000FF");
+                    });
+
+                    $("h1").mouseleave(function () {
+                        $(this).css("color", "#000000");
+                    });
+
+                    $('a[href^="#"]').click(function () {
+                        console.log("this");
+                        console.log(this);
+                        console.log("-");
+                        console.log("this.hash");
+                        console.log(this.hash);
+                        console.log("-");
+                        var target = $(this.hash);
+                        console.log("$(this.hash)");
+                        console.log(target);
+                        console.log("-");
+
+                        if (target.length) {
+
+
+                            $('html, body').animate({
+
+                                scrollTop: target.offset().top
+                            }, 900);
+                        }
+
+                    });
+                    var navIcon = my$("navIcon");
+                });
+            </script>
+</body>
+</html>

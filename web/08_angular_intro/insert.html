@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Insert</title>
+        <link href="styles.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body ng-app="app">
+
+        <div id='titleNav'>
+            <div id='title'>Angular </div>
+            <div id='nav'>
+                <div class='navLink'><a href='index.html'>Home</a></div>
+                <div class='navLink'><a href='insert.html'>Insert</a></div>
+                <div class="navLink"><a href="../labs.html">Labs</a></div>
+            </div>
+        </div>
+        <div style='clear:both'></div>
+
+        <div id='contentArea' ng-controller="contentController"> 
+            <h2>Insert Product</h2>
+
+            <table>
+                <tr>
+                    <td class="fieldName">Id</td>
+                    <td><input type="text" id="id"></td>
+                    <td class="fieldError" id="idError"></td>
+                </tr>
+                <tr>
+                    <td class="fieldName">Name</td>
+                    <td><input type="text" id="name"></td>
+                    <td class="fieldError" id="nameError"></td>
+                </tr>
+                <tr>
+                    <td class="fieldName">Rating</td>
+                    <td><input type="text" id="rating"></td>
+                    <td class="fieldError" id="ratingError"></td>
+                </tr>
+            </table>
+
+            <p>
+                <input type="button" value="Insert Save" onclick="insertSave()">
+            </p>
+
+            <p id="formMsg">
+            </p>
+
+            <p>
+                <a href="index.html">back to list</a>
+            </p>
+            
+            <script src="js/ajaxFw.js"></script>
+            <script>
+
+                            function my$(ele) {
+                                return document.getElementById(ele);
+                            }
+                            function insertSave() {
+                                var newproduct = {
+                                    PRODUCT_ID: my$("id").value,
+                                    PRODUCT_NAME: my$("name").value,
+                                    RATING: my$("rating").value
+                                };
+
+                                // JSON.stringify is implemented by the browser (not my code).
+                                var productJSON = JSON.stringify(newproduct);
+                                productJSON = escape(productJSON);
+                                ajaxCall("webAPIs/productInsert.jsp?jsonData=" + productJSON,
+                                        function (response) { // success function
+                                            // write the field level validation messages on the page
+                                            my$("idError").innerHTML = response.id;
+                                            my$("nameError").innerHTML = response.name;
+                                            my$("ratingError").innerHTML = response.rating;
+                                            my$("formMsg").innerHTML = response.errorMsg;
+                                            if (response.errorMsg.length === 0) { // empty string meant success
+                                                my$("formMsg").innerHTML = "Product inserted !";
+                                            }
+                                        },
+                                        function (error) {
+                                            my$("formMsg").innerHTML = error;
+                                        });
+
+                            }
+            </script>
+        </div>
+
+    </body>
+</html>

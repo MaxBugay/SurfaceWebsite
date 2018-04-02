@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Angular List Data</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
+
+        <link href="styles.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body ng-app="app">
+
+        <div id='titleNav'>
+            <div id='title'>Angular</div>
+            <div id='nav'>
+                <div class='navLink'><a href='index.html'>Home</a></div>
+                <div class='navLink'><a href='insert.html'>Insert</a></div>
+                <div class='navLink'><a href='../labs.html'>Labs</a></div>
+            </div>
+        </div>
+        <div style='clear:both'></div>
+
+        <div id='contentArea' ng-controller="contentController"> 
+
+            <h2>Product List</h2>
+            <table>
+                <tr>
+                    <th><a href="" ng-click="sortField = 'PRODUCT_ID'; reverse = !reverse">Id <img src="sortUpDown16.png"></a></th>
+                    <th style="text-align: left"><a href="" ng-click="sortField = 'PRODUCT_NAME'; reverse = !reverse">Name <img src="sortUpDown16.png"></a></th>
+                    <th><a href="" ng-click="sortField = 'PRICE'; reverse = !reverse">Rating <img src="sortUpDown16.png"></a></th>
+                    <th><a href="" ng-click="sortField = 'IMAGE_URL'; reverse = !reverse">Image <img src="sortUpDown16.png"></a></th>
+                </tr>
+                <tr ng-repeat="product in products| filter:query | orderBy:sortField:reverse">
+
+                    <td>{{product.PRODUCT_ID}}</td>
+                    <td>{{product.PRODUCT_NAME}}</td>
+                    <td>{{product.RATING}}</td>
+                    <td><img src="{{product.IMAGE_URL}}"></td>
+                </tr>
+            </table>
+
+            {{deleteMsg}}
+            <br>
+            {{listMsg}}
+
+        </div>
+
+        <script src='js/productAppAndController.js'></script>
+    </body>
+</html>

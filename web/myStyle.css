@@ -1,0 +1,130 @@
+/* 
+      This is called an external style sheet. Put styles in here that 
+      you want to be common to all or most pages.
+      
+      Use ONLY this (slash/star)) type of comment inside a style sheet. Other types 
+      (like double slash) do not work.  
+*/
+
+html, body {
+    margin:0; /* don't want tiny white border inside browser window */
+    padding:0; /* don't want tiny white border inside browser window */
+}
+body {
+    font-family: "Segoe UI", "Segoe UI", serif;
+    background-color: lightsteelblue; /* this is the turqoise color */
+    font-size:20px;
+    min-width: 720px
+}
+#titleNav {
+    font-family: "Segoe UI", "Segoe UI", serif;
+    color:azure;
+    background-color:midnightblue;
+    height: 80px;
+    min-width:600px; /* forces horizontal scroll bar when browser width < the size specified 
+                                    This prevents unwanted wrapping of nav bar elements */
+    }
+#pageTitle { /* position web site title inside the titleNav */
+    padding-top:10px;
+    padding-left:10px;
+    font-size:45px;
+    font-weight:bold;
+    letter-spacing: 1.5px;
+    text-align:center;
+    float:left;
+    text-shadow: silver 2px 4px 5px
+}
+#nav {
+    margin-right:2%;
+    float:right;
+    letter-spacing: 1px;
+    border-radius: 10pt;
+}
+
+/* "#nav a" styles links inside of element with id="nav" */
+#nav a {
+    text-decoration:none;  /* Do not links in "nav" to be underlined */
+    color: azure; /* light gray */
+    border-radius: 10pt;
+}
+
+/* Styles any div inside of an element with id="nav". */
+#nav div {
+    margin-top:3px;
+    float:left;
+    font-size:18px;
+    padding: 6px;
+    padding-top:34px;
+    height: 33px;
+    text-align:center;
+    letter-spacing: 1px;
+    font-weight:bold;
+}
+#header2 {
+    background-color: midnightblue;
+    color: azure;
+    border-radius: 10pt;
+    padding: 5px;
+    min-width: 80px;
+}
+
+/* When the user hover's over a div that's inside of and element with 
+   id="nav", the text inside the div will become larger and with less top 
+   padding (so it is still centered vertically). */
+#nav div:hover {
+    background-color: azure; /* this is the turqoise color */
+    
+}
+
+/* When the user hovers over a div that's inside of an element with 
+   id="nav", the text of links inside the div will change color. */
+#nav div:hover a {
+    color: black;
+}
+
+.stopFloat {
+    clear:both;
+}
+#content {
+    color: black;
+    padding-left:4px;	
+    padding-right:4px;	
+    padding-bottom: 30px; /* Footer is 16+5+5=26px tall and it's fixed. 
+                            Add bottom margin so that it does not cover up any 
+                            of the bottom of your content. */
+
+}
+
+/* I made the footer be always fixed to the bottom of the browser window. */
+#footer {
+    position: fixed;
+    bottom:0px;
+    left:0xp;
+    width:100%;
+    background-color:midnightblue;
+    color:azure;
+    clear:both;
+    text-align:center;
+    padding:5px;	 	 
+}
+
+.width33Pct {
+    padding-top: 22px;
+    padding: 1%;
+    width:33.3%;
+    float:left;
+    box-sizing: border-box;
+}
+
+.width66Pct {
+    padding: 1%;
+    width:66.6%;
+    float:left;
+    box-sizing: border-box;
+}
+
+img {
+    width:100%;
+    border-radius: 10px;
+    margin-top: 10px;
+}

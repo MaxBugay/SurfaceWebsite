@@ -1,0 +1,157 @@
+
+<html>
+    <head>
+        <title>Javascript Intro</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+            html, body {
+                margin:0; /* don't want tiny white border inside browser window */
+                padding:0; /* don't want tiny white border inside browser window */
+            }
+            body {
+                color: black;
+                font-family: "Segoe UI", "Segoe UI", serif;
+                background-color: lightsteelblue;
+                font-size:16px;
+                min-width: 900px;
+                padding: 10px;
+            }
+            h1 {
+                font-size: 3.0em;
+                font-family: "Segoe UI", "Segoe UI", serif;
+                color: midnightblue; 
+                background-color: azure;
+                min-width: 150px;
+                max-width: 11%;
+                padding: 10px;
+            }
+            #title {
+                font-family: "Segoe UI", "Segoe UI", serif;
+                font-size: 36px;
+                color: black;
+                min-width:600px;
+                border-radius: 10%;
+            }
+            #titleHeader {
+                background-color: black;
+                font-weight: bold;
+                min-width: 100px;
+                float:left;
+                text-shadow: black;
+                text-align: left;
+            }
+            #objListDiv {
+                background-color: azure;
+                font-family: "Segoe UI", "Segoe UI", serif;
+                color: black;
+                padding: 10px;
+                max-width: 600px;
+                text-align: left;
+            }
+            #footer {
+                position: fixed;
+                bottom:0px;
+                left:0xp;
+                width:100%;
+                background-color:midnightblue;
+                color:azure;
+                clear:both;
+                text-align:center;
+                font-weight: bold;
+            }
+            .clear {
+                clear:both;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1><a href="../index.html">Home</a></h1>
+        <div id="objListDiv"></div>
+        <br/>
+        Which Configuration Number do you want to change? <input type="text" id="whichConfig"/><br/> <br/>
+        <button onclick="updateProcessor()">New Processor</button> <input type="text" id="processorBox"/> <br/> <br/>
+        <button onclick="updateColor()">Change Color </button> <input type="text" id="colorChange"/> <br/> <br/>
+        <button onclick="updateStorage()">Change Storage Size</button> <input type="text" id="storageChange"/> <br/> <br/>
+        <input type="button" onclick ="sortByProcessor()" value="Processor Sort"/>
+        <input type="button" onclick ="sortByColor()" value="Color Sort"/>
+        <input type="button" onclick ="sortByStorage()" value="Storage Sort"/> <br/> <br/>
+        Processor: <input type="text" id="newProcessor"/> Color: <input type="text" id="newColor"/> Storage Size: <input type="text" id="newStorage"/>
+        <input type="button" onclick ="addConfig()" value="Add Configuration"/>
+        <br/><br/>
+        <div id="footer">
+            Max Bugay
+        </div>
+        <script src="sort.js"></script>
+        <script src="listObject.js"></script>
+        <script>
+            "use strict";
+
+            function updateProcessor() {
+                var which = Number(document.getElementById("whichConfig").value);
+                if (isNaN(which) || (which < 0) || (which > objList.length)) {
+                    return;
+                } else {
+                    var newProcessor = document.getElementById("processorBox").value;
+                    objList[which].setProcessor(newProcessor);
+                    document.getElementById("objListDiv").innerHTML = objList.showList();
+                }
+            }
+            
+            function updateColor() {
+                var which = Number(document.getElementById("whichConfig").value);
+                if (isNaN(which) || (which < 0) || (which > objList.length)) {
+                    return;
+                } else {
+                    var newColor = document.getElementById("colorChange").value;
+                    objList[which].setColor(newColor);
+                    document.getElementById("objListDiv").innerHTML = objList.showList();
+                }
+            }
+
+            function updateStorage() {
+                var which = Number(document.getElementById("whichConfig").value);
+                if (isNaN(which) || (which < 0) || (which > objList.length)) {
+                    return;
+                } else {
+                    var setStorage = document.getElementById("storageChange").value;
+                    objList[which].setStorage(setStorage);
+                    document.getElementById("objListDiv").innerHTML = objList.showList();
+                }
+            }
+            
+            function sortByProcessor() {
+                sortByKey(objList, "getProcessor()");
+                document.getElementById("objListDiv").innerHTML = objList.showList();
+            }
+
+            function sortByColor() {
+                sortByKey(objList, "getColor()");
+                document.getElementById("objListDiv").innerHTML = objList.showList();
+            }
+            
+            function sortByStorage() {
+                sortByKey(objList, "getStorage()");
+                document.getElementById("objListDiv").innerHTML = objList.showList();
+            }
+            
+            function addConfig() {
+                objList.add(document.getElementById("newProcessor").value,
+                                    document.getElementById("newColor").value,
+                                    document.getElementById("newStorage").value);
+                document.getElementById("objListDiv").innerHTML = objList.showList();
+            }
+            
+
+            debugger;
+            var objList = makeObjectList();
+            objList.add("i3", "Cobalt Blue", 128);
+            objList.add("i5", "Burgundy Red", 512);
+            objList.add("i7", "Platinum Gold", 256);
+
+            document.getElementById("objListDiv").innerHTML = objList.showList();
+
+        </script>
+    </body>
+</html>

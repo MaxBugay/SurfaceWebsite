@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Microsoft Surface</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <link href="myStyle.css" rel="stylesheet" type="text/css" />
+    </head>    
+
+    <body>
+        
+        <div id="titleNav">
+
+            <!-- The style sheet has pageTitle floated left -->
+            <div id="pageTitle">
+                Microsoft Surface
+            </div>
+
+            <!-- The style sheet has nav floated right -->
+            <div id="nav">
+                <div><a href="index.html">Home</a></div>
+                <div><a href="labs.html">Labs</a></div>
+                <!--<div><a href="tutorial.html">Tutorial</a></div>
+                <div><a href="angular.html">Angular</a></div>-->
+            </div>
+
+            <!-- Must stop the floating so that elements below (e.g., content) 
+            don't float up into here. -->
+            <div class="stopFloat"></div>
+        </div>
+
+        <div id="content">
+            <div class="width66Pct">
+
+                <p>
+                    This web site will discuss the Microsoft Surface family and which is the best for you.
+                </p>
+                <h2 id="header2">Meet the Surface Family</h2>
+                <ul>
+                    <li>
+                        <strong>Surface Book</strong>: Powerhouse Performance 
+                        <p> This is the ultimate laptop. </p>
+                    <li>
+                        <strong>Surface Pro</strong>: Ultra-light and versatile
+                        <p> This is the tablet to replace your laptop. </p>
+                    <li>            
+                        <strong>Surface Laptop</strong>: Style and Speed
+                        <p> This is the most personal laptop. </p>
+                    <li>            
+                        <strong>Surface Studio</strong>: Turn your desk into a Studio
+                        <p> This is a canvas for your ideas. </p> 
+                    </li>
+
+                </ul>  
+
+            </div>
+            <div class="width33Pct" >
+
+                <img src="pics/Surface-Book.png">
+
+                <img src="pics/Surface-Pro.png">
+
+                <br/>
+            </div> 
+
+            <!-- Must stop the floating so that elements below don't float up into here. -->
+            <div class="stopFloat"></div>
+        </div> <!-- content. [[Keep track of nesting]] -->
+        <div id="footer">
+            Max Bugay
+        </div>
+    </body>
+</html>

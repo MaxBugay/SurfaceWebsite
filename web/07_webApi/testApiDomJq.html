@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Get Surface Product or Accessories (Web API)</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <style type="text/css">
+            body {
+                background-color: azure;
+                color:midnightblue;
+                font-size:20px;
+                font-weight:bold;
+                letter-spacing:1px;
+                line-height:24px;
+                margin:auto;
+                font-family: "Segoe UI", "Segoe UI", serif;
+            }
+            #box, table, #productList {
+                margin:15px;
+            }
+
+            #imageContainer {
+                width:70px;
+                height: 60px;
+                display:none;
+            }
+
+            #productImage {
+                padding-bottom:25px;
+            }
+
+            thead td {
+                color:midnightblue;
+                padding: 4px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                background-color: azure;
+                font-weight: bold;
+                font-size:20px;
+            }
+
+            td {
+                padding: 10px;
+                background-color: azure;
+                font-size:32px;
+                line-height: 200%;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="box">
+            <h1>Get Surface Product or Accessories</h1>
+
+            <br/><br/>Remember, when testing from home, must be tunnelled in, 
+            and must right click Run (not View). 
+
+            <br/><br/>Enter starting characters of products for search, for example
+            <input type="text" id="productSearch" value="S" size="30" />
+            <input type="button" id="searchButton" value="Get Products and Accessories" onClick=""/>
+            <br/>
+            <div id="databaseError"></div>
+            <div id="productTable"></div>  
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="ajaxFw.js"></script>
+        <script language="Javascript" type="text/javascript">
+            
+            $(document).ready(function () {                
+            function ajaxGetData() {
+                //alert ('sending request'); 
+                //var url = "DataSearch_Web_API.jsp";
+                var url = "webApi.jsp";
+                url += "?q=" + $("#productSearch").get(0).value;
+                console.log("ajaxGetData() url is " + url);
+                //httpReq.open("GET", url);
+                //httpReq.onreadystatechange = ajaxCallbackData;
+                //httpReq.send(null);
+                ajaxCall(url, ajaxCallbackData, ajaxCallbackData);
+                document.getElementById("productTable").innerHTML = "";
+            }
+
+            function ajaxCallbackData(response) {
+                    //console.log("ajaxCallBackData(). Ready state is "+
+                    //httpReq.readyState+ " and httpReq status is "+httpReq.status);
+
+                    //var response = httpReq.responseText;
+                    console.log ("ajaxCallBackData() response text is " + response);
+
+                    // wrap the json in parentheses to avoid tripping over javascript ambiguity...
+                    //response = "(" + response + ")";
+                    var obj = eval(response);
+                    console.log ("click to open up 'obj' item below.");                   
+                    console.log (obj);
+                    
+                    if (obj === null) {
+                        $("#productTable").append("Error: JSON string evaluated to null.");
+                        return;
+                    }
+                    if (obj.dbError === null) {
+                        $("#productTable").append("Error: JSON string did not have a 'dbError' property.");
+                        return;
+                    }
+
+                    if (obj.dbError.length > 0) {
+                        $("#productTable").append("Database error: " + obj.dbError);
+                        return;
+                    }
+
+                    if (obj.recordList === null) {
+                        $("#productTable").append("Error: JSON string did not have a 'recordList' property.");
+                        return;
+                    }
+
+                    if (obj.recordList.length === 0) {
+                        //$("productTable").innerHTML = "No Surface Products Match Your Search";
+                        $("#productTable").append("No Surface Product Match Your Search");
+                        return;
+                    }
+
+                    // use javascript to modify the DOM (document object model). 
+                    // we create a HTML table, then add rows and cols into that table.
+                    var newRow;
+                    var newCell;
+                    var newImg;
+
+                    var newTable = document.createElement("table");
+                    $("#productTable").append(newTable);
+
+                    for (i in obj.recordList) {
+
+                        newRow = newTable.insertRow(i);
+                        newCell = newRow.insertCell(0);
+                        newImg = document.createElement("img");
+                        newImg.src = obj.recordList[i].IMAGE_URL;
+                        newCell.appendChild(newImg);
+                        
+                        var exLink = obj.recordList[i].PRODUCT_URL;
+                        
+                        newCell = newRow.insertCell(1);
+                        newCell.innerHTML = obj.recordList[i].PRODUCT_NAME + "<br/> Product ID: " 
+                                + obj.recordList[i].PRODUCT_ID + "<br/> Starting at "
+                                + obj.recordList[i].PRICE + "<br/> " 
+                                + obj.recordList[i].RATING + " out of 5 <br/>"
+                                + "<a href=" + exLink + "> External Link";
+                        
+                    }
+
+                    // done adding regular rows, add header row at top: 
+
+                    newHead = newTable.createTHead();
+                    newRow = newHead.insertRow(0);
+
+                    newCell = newRow.insertCell(0);
+                    newCell.innerHTML = "Product Image";
+
+                    newCell = newRow.insertCell(1);
+                    newCell.innerHTML = "Product Description";
+                    
+            }
+
+            // MAIN PROGRAM
+
+            //Make the XMLHttpRequest Object
+            var httpReq;
+            if (window.XMLHttpRequest) {
+                httpReq = new XMLHttpRequest();  //For Firefox, Safari, Opera
+            } else if (window.ActiveXObject) {
+                httpReq = new ActiveXObject("Microsoft.XMLHTTP");         //For IE 5+
+            } else {
+                alert('ajax not supported');
+            }
+            $("#searchButton").click(function () {
+                ajaxGetData();
+            });
+        });
+        </script>
+
+    </body>
+</html>
