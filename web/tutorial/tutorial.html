@@ -273,19 +273,48 @@ and open the template in the editor.
         <script src='tutorialFw.js'> </script>
         <script>
             
+            /*function my$(eleId) {
+                return document.getElementById(eleId);
+            }*/
+            
             var colorArray = ['Platinum', 'Burgundy', 'Cobalt', 'Gold'];
             
-            var n = 3;
+            slidePictures = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg"];
             
-            var slideshowObj = makeSlideshow(colorArray, n);
+            /*var slideshowObj = tutorialFw.makeSlideshow({
+                slidePics: slidePictures
+            });*/
+    
+            var slideshowObj = {};
             
             var slideIndex = 1;
             //showSlides(slideIndex);
 
             function callSlides(color) {
                 console.log(color);
-                slideshowObj.changeSlideshow(color);
+                //slideshowObj.changeSlideshow(color);
+                if (color === colorArray[0]) {
+                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg"];
+                }
+                else if (color === colorArray[1]) {
+                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Burg1.jpg", "../pics/tutorialpics/Surface-Laptop-Burg2.jpg", "../pics/tutorialpics/Surface-Laptop-Burg3.jpg"];
+                }
+                else if (color === colorArray[2]) {
+                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Col1.jpg", "../pics/tutorialpics/Surface-Laptop-Col2.jpg", "../pics/tutorialpics/Surface-Laptop-Col3.jpg"];
+                }
+                else if (color === colorArray[3]) {
+                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Gold1.jpg", "../pics/tutorialpics/Surface-Laptop-Gold2.jpg", "../pics/tutorialpics/Surface-Laptop-Gold3.jpg"];
+                }
+                c = color;
+                
+                slideshowObj = makeSlideshow(slidePictures);
+                
+                //console.log(slidePictures);
             }
+            
+            slideshowObj.showSlides(slideIndex);
+            
+            console.log(slideshowObj);
 
             function plusSlides(n)  {
                 showSlides(slideIndex += n);
@@ -317,7 +346,7 @@ and open the template in the editor.
             }*/
             
 
-            /*function showSlides(n) {
+            function showSlides(n) {
             var i;
             var slides = document.getElementsByClassName("Platinum");
             var slides = document.getElementsByClassName("Burgundy");
@@ -332,7 +361,7 @@ and open the template in the editor.
             }
             slides[slideIndex-1].style.display = "block";  
             dots[slideIndex-1].className += " active";
-            }*/
+            }
         </script>
     </body>
 </html>
