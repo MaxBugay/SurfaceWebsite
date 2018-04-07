@@ -11,6 +11,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="../myStyle.css" rel="stylesheet" type="text/css" />
         <style>
+            
          .btn1 {
             background-color: #A2A5AC;
             border: none;
@@ -20,16 +21,6 @@ and open the template in the editor.
             cursor: pointer;
             text-align: center;
             margin: auto;
-            
-        }
-
-        /* Darker background on mouse-over */
-        .btn1:hover {
-            border-color: black;
-            border: 1px solid black;
-        }
-        .btn1:selected {
-            border: 1px solid black;
         }
         
         .btn2 {
@@ -43,11 +34,6 @@ and open the template in the editor.
             margin: auto;
         }
 
-        /* Darker background on mouse-over */
-        .btn2:hover {
-            border-color: black;
-            border: 1px solid black;
-        }
         .btn3 {
             background-color: #4D6977;
             border: none;
@@ -59,11 +45,6 @@ and open the template in the editor.
             margin: auto;
         }
 
-        /* Darker background on mouse-over */
-        .btn3:hover {
-            border-color: black;
-            border: 1px solid black;
-        }
         .btn4 {
             background-color: #B4AAA0;
             border: none;
@@ -75,52 +56,32 @@ and open the template in the editor.
             margin: auto;
         }
 
-        /* Darker background on mouse-over */
-        .btn4:hover {
+        .btn1:hover, .btn2:hover, .btn3:hover, .btn4:hover {
             border-color: black;
             border: 1px solid black;
         }
         
-        .ColorButtons {
+        .ColorButtons , .ControlButtons{
             padding: 10px;
             margin: auto;
         }
-        
-        h1, h2 {
-            padding: 10px;
-        }
-        
-        * {box-sizing: border-box}
-        body {font-family: Verdana, sans-serif; margin:0}
-        
-        img {vertical-align: middle;}
 
         .slideshow-container {
-            max-width: 1000px;
+            max-width: 1200px;
             position: relative;
             margin: auto;
         }
 
         /* Next & previous buttons */
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            padding: 16px;
-            margin-top: -50px;
+        .prev, .next, .play, .pause{
             background-color: black;
+            border: none;
             color: white;
-            font-weight: bold;
-            font-size: 18px;
-            transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
-        }
-
-        /* Position the "next button" to the right */
-        .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
+            padding: 16px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            margin: auto;
         }
 
         /* On hover, add a black background color with a little bit see-through */
@@ -146,7 +107,7 @@ and open the template in the editor.
         </style>
     </head>
 
-    <body onload="autoRun()">
+    <body>
         <div id="titleNav">
 
             <!-- The style sheet has pageTitle floated left -->
@@ -170,57 +131,65 @@ and open the template in the editor.
         <h2>Tutorial: Selection Slideshow</h2>
 
         <div class = "ColorButtons"> Color Buttons:
-        <button class="btn1" onclick="callSlides('Platinum')">Platinum Silver</button>
-        <button class="btn2" onclick="callSlides('Burgundy')">Burgundy Red</button>
-        <button class="btn3" onclick="callSlides('Cobalt')">Cobalt Blue</button>
-        <button class="btn4" onclick="callSlides('Gold')">Graphite Gold</button>
+        <button class="btn1" onclick="changeColor('Platinum'), changeSlide(0)">Platinum Silver</button>
+        <button class="btn2" onclick="changeColor('Burgundy'), changeSlide(0)">Burgundy Red</button>
+        <button class="btn3" onclick="changeColor('Cobalt'), changeSlide(0)">Cobalt Blue</button>
+        <button class="btn4" onclick="changeColor('Gold'), changeSlide(0)">Graphite Gold</button>
+        </div>
+        
+        <div class = "ControlButtons"> Control Buttons:
+        <button class="prev" onclick="changeSlide(-1)">Previous Slide</button>
+        <button class="play" onclick="startSlideShow()">Play</button>
+        <button class="pause" onclick="stopSlideShow()">Pause</button>
+        <button class="next" onclick="changeSlide(1);">Next Slide</button>
         </div>
         
         <img class = slideshow-container src ="../pics/tutorialpics/Surface-Laptop-Plat1.jpg" id="slideshow" />
         <br />
         
-        
-        <a class="prev" onclick="changeImage(-1); return false;"> Previous Slide</a><br />
-        <a class="next" onclick="changeImage(1); return false;"> Next Slide</a><br />
+        <img class = slideshow-container src ="../pics/tutorialpics/Surface-Laptop-Plat1.jpg" id="slideshow2" />
+        <br />
               
         <script src="tutorialFw.js"> </script>
         <script>
             
-            function my$(eleId) {
-                return document.getElementById(eleId);
-            }
-            
-            var color;
-           
-            var colorArray = ['Platinum', 'Burgundy', 'Cobalt', 'Gold'];
-            
+            var color;           
             slidePictures = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg"];
-
-            function callSlides(c) {
-                console.log(c, slidePictures);
-                color = c;
-                changeColor(color);
-            }
             
-            var slideshowObj = slideshowFW.makeSlideShow({
+            var slideshowObj = slideShowFW.makeSlideShow({
                 id: "slideshow",
+                slidePics: slidePictures,
+                color: color
+            });
+            
+            var slideshowObj2 = slideShowFW.makeSlideShow({
+                id: "slideshow2",
                 slidePics: slidePictures,
                 color: color
             });
             
             function changeColor(slides) {
                 slideshowObj.changeColor(slides);
+                slideshowObj2.changeColor(slides);
             }
             
-            function changeImage(n) {
-                slideshowObj.changeImage(n);
+            function changeSlide(n) {
+                slideshowObj.changeSlide(n);
+                slideshowObj2.changeSlide(n);
             }
             
-            function autoRun() {
-                setInterval("changeImage(1)", 2000);
+            function startSlideShow() {
+                slideshowObj.startSlideShow();
+                slideshowObj2.startSlideShow();
+            }
+            
+            function stopSlideShow() {
+                slideshowObj.stopSlideShow();
+                slideshowObj2.stopSlideShow();
             }
             
             console.log(slideshowObj);
+            
         </script>
     </body>
 </html>
