@@ -63,17 +63,26 @@ and open the template in the editor.
         
         .ColorButtons , .ControlButtons{
             padding: 10px;
-            margin: auto;
+            margin: 0px auto;
+            text-align: center;
         }
 
-        .slideshow-container {
+        .slideshow-container 
+        {
+            width:100%;
+            height:1200px;
+            text-align: center;
+        }
+        
+        .slideshow-container img{
             max-width: 1200px;
-            position: relative;
-            margin: auto;
+            height: 700px;
+            margin: 0px auto;
+            text-align: center;
         }
 
         /* Next & previous buttons */
-        .prev, .next, .play, .pause{
+        .prev, .next, .play {
             background-color: black;
             border: none;
             color: white;
@@ -104,6 +113,10 @@ and open the template in the editor.
         @media only screen and (max-width: 300px) {
             .prev, .next,.text {font-size: 11px}
         }
+        
+        h2 {
+            text-align: center;
+        }
         </style>
     </head>
 
@@ -119,7 +132,7 @@ and open the template in the editor.
             <div id="nav">
                 <div><a href="../index.html">Home</a></div>
                 <div><a href="../labs.html">Labs</a></div>
-                <div><a href="tutorial.html">Tutorial</a></div>
+                <div><a href="../tutorial/index.html">Tutorial</a></div>
                 <div><a href="../angular.html">Angular</a></div>
             </div>
 
@@ -140,38 +153,61 @@ and open the template in the editor.
         <div class = "ControlButtons"> Control Buttons:
         <button class="prev" onclick="changeSlide(-1)">Previous Slide</button>
         <button class="play" onclick="startSlideShow()">Play</button>
-        <button class="pause" onclick="stopSlideShow()">Pause</button>
         <button class="next" onclick="changeSlide(1);">Next Slide</button>
         </div>
         
-        <img class = slideshow-container src ="../pics/tutorialpics/Surface-Laptop-Plat1.jpg" id="slideshow" />
+        <div class = slideshow-container >
+        
+        <img src ="../pics/tutorialpics/Surface-Laptop-Plat1.jpg" id="slideshow" />
         <br />
         
-        <img class = slideshow-container src ="../pics/tutorialpics/Surface-Laptop-Plat1.jpg" id="slideshow2" />
+        <img src ="../pics/tutorialpics/Surface-Laptop-Plat1.jpg" id="slideshow2" />
         <br />
               
-        <script src="tutorialFw.js"> </script>
+        </div>
+        
+        <script src="tutorialFw.js"> </script> 
         <script>
             
-            var color;           
-            slidePictures = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg"];
+            var selectedColor;
+            var colorArray = ['Platinum', 'Burgundy', 'Cobalt', 'Gold'];
+            var slidePictures;
             
+            function changeColor(color) {
+                if (color === colorArray[0]) {
+                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
+                }
+                else if (color === colorArray[1]) {
+                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Burg1.jpg", "../pics/tutorialpics/Surface-Laptop-Burg2.jpg", "../pics/tutorialpics/Surface-Laptop-Burg3.jpg", "../pics/tutorialpics/Surface-Laptop-Burg4.jpg", "../pics/tutorialpics/Surface-Laptop-Burg5.jpg"];
+                }
+                else if (color === colorArray[2]) {
+                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Cob1.jpg", "../pics/tutorialpics/Surface-Laptop-Cob2.jpg", "../pics/tutorialpics/Surface-Laptop-Cob3.jpg", "../pics/tutorialpics/Surface-Laptop-Cob4.jpg", "../pics/tutorialpics/Surface-Laptop-Cob5.jpg"];
+                }
+                else if (color === colorArray[3]) {
+                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Gold1.jpg", "../pics/tutorialpics/Surface-Laptop-Gold2.jpg", "../pics/tutorialpics/Surface-Laptop-Gold3.jpg", "../pics/tutorialpics/Surface-Laptop-Gold4.jpg", "../pics/tutorialpics/Surface-Laptop-Gold5.jpg"];
+                }
+                
+                console.log(slidePictures);
+                selectedColor = color;
+                
+                slideshowObj.changeColorSlides(slidePictures);
+                
+                /*slideshowObj.changeColor(slides);
+                slideshowObj2.changeColor(slides);*/
+            }
+    
             var slideshowObj = slideShowFW.makeSlideShow({
                 id: "slideshow",
                 slidePics: slidePictures,
-                color: color
+                color: selectedColor
             });
             
             var slideshowObj2 = slideShowFW.makeSlideShow({
                 id: "slideshow2",
                 slidePics: slidePictures,
-                color: color
+                color: selectedColor
             });
             
-            function changeColor(slides) {
-                slideshowObj.changeColor(slides);
-                slideshowObj2.changeColor(slides);
-            }
             
             function changeSlide(n) {
                 slideshowObj.changeSlide(n);
@@ -181,11 +217,6 @@ and open the template in the editor.
             function startSlideShow() {
                 slideshowObj.startSlideShow();
                 slideshowObj2.startSlideShow();
-            }
-            
-            function stopSlideShow() {
-                slideshowObj.stopSlideShow();
-                slideshowObj2.stopSlideShow();
             }
             
             console.log(slideshowObj);

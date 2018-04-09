@@ -4,7 +4,7 @@ var slideShowFW = {};
     
     var slideIndex = 0;
     var slideShow;
-    var colorArray = ['Platinum', 'Burgundy', 'Cobalt', 'Gold'];
+    //var colorArray = ['Platinum', 'Burgundy', 'Cobalt', 'Gold'];
     var slides = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
     var slidesLength = slides.length - 1;
     var interval;
@@ -14,6 +14,8 @@ var slideShowFW = {};
     }
     
     slideShowFW.makeSlideShow = function (params) {
+        
+        //Checks parameters
         if (!params || !params.id) {
             alert("makeSlideShow must be passed an object with 'id' property.");
             return;
@@ -21,6 +23,7 @@ var slideShowFW = {};
         
         slideShow = $(params.id);
         
+        //Checks id
         if (!slideShow) {
             alert("makeSlideShow must be passed an object with an 'id' property " +
                     "that references an HTML element.");
@@ -31,8 +34,16 @@ var slideShowFW = {};
         if (!params.slidePics || !Array.isArray(params.slidePics)) {
             params.slidePics = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
         }
-            
-        slideShow.changeColor = function (color) {
+        
+        //Changes slideshow to desired color
+        slideShow.changeColorSlides = function (colorSlides) {
+            slides = colorSlides;
+            imageLength = slides.length - 1;
+        };
+        
+        //The changeColor function was originally part of the framework, but didn't make sense because the user calling it would just get my slideshow's pictures and not their own. It still works, but is commented out so the user can change the images in the html file. 
+        
+        /*slideShow.changeColor = function (color) {
             if (color === colorArray[0]) {
                 params.slidePics = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
             }
@@ -47,11 +58,12 @@ var slideShowFW = {};
             }
             slides = params.slidePics;
             imageLength = slides.length - 1;
-        };    
+        };*/    
         
         slideShow.style.textAlign = "center";
         slideShow.style.padding = 10 + "px";
         
+        //Next or Previous Slides
         slideShow.changeSlide = function(n) {
             slideIndex += n;
             
@@ -63,17 +75,13 @@ var slideShowFW = {};
             if (slideIndex < 0) {
                 slideIndex = slidesLength;
             }
+            
             document.getElementById(params.id).src = slides[slideIndex];
         };
         
+        //Auto Play 
         slideShow.startSlideShow = function() {
-             interval = setInterval("changeSlide(1)", 2000);
-             return interval;
-        };
-        
-        slideShow.stopSlideShow = function() {
-             clearInterval(interval);
-             return interval;
+            interval = setInterval("changeSlide(1)", 2000);
         };
         
         console.log(slideShow);

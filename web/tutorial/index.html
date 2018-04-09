@@ -23,7 +23,7 @@ and open the template in the editor.
             <div id="nav">
                 <div><a href="../index.html">Home</a></div>
                 <div><a href="../labs.html">Labs</a></div>
-                <div><a href="tutorial.html">Tutorial</a></div>
+                <div><a href="../tutorial/index.html">Tutorial</a></div>
                 <div><a href="../angular.html">Angular</a></div>
             </div>
 
@@ -34,8 +34,211 @@ and open the template in the editor.
 
         <h2>Tutorial: Selection Slideshow</h2>
         
+        <a href="tutorial.html">Click here to view the Selection Slideshow in action. </a> 
+        <br>
+        
+        <a href="tutorialFw.js">Click here to view the Selection Slideshow's Framework. </a> 
+        <br>
+        
+        <a href="log.html">Click here to understand how the Selection Slideshow's Framework was developed. </a> 
+        <br>
+        
+        <a href="tutorial.zip">Click here to download the zipped folder of the Selection Slideshow to try it yourself. </a> 
+        <br>
+        
         <p>
-            This framework will allow you to click on a selected color button and call the specific sets of slides of the color's value. This framework could also be used for non-color buttons or slides.  
-        </p>
+            This framework will allow you to click on a selected color button and call the specific sets of slides of the color's value. This framework could also be used for non-color buttons or slides.
+            The following steps will teach you how to utilize this framework for creating buttons that will call different colored slideshows. 
+            
+            <br><br>
+        <b>Step One: </b> Design the CSS buttons and slideshow container div. Pick different colors or names for the buttons to represent the slideshow that the button will pull up when clicked. 
+        <pre>
+        .btn1 {
+            background-color: #A2A5AC;
+            border: none;
+            color: black;
+            padding: 16px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            margin: auto;
+        }
+        
+        .btn2 {
+            background-color: #663E3F;
+            border: none;
+            color: black;
+            padding: 16px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            margin: auto;
+        }
+
+        .btn3 {
+            background-color: #4D6977;
+            border: none;
+            color: black;
+            padding: 16px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            margin: auto;
+        }
+
+        .btn4 {
+            background-color: #B4AAA0;
+            border: none;
+            color: black;
+            padding: 16px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            margin: auto;
+        }
+
+        .btn1:hover, .btn2:hover, .btn3:hover, .btn4:hover {
+            border-color: black;
+            border: 1px solid black;
+        }
+        
+        .ColorButtons , .ControlButtons{
+            padding: 10px;
+            margin: 0px auto;
+            text-align: center;
+        }
+
+        .slideshow-container 
+        {
+            width:100%;
+            height:1200px;
+            text-align: center;
+        }
+        
+        .slideshow-container img{
+            max-width: 1200px;
+            height: 700px;
+            margin: 0px auto;
+            text-align: center;
+        }
+
+        /* Next & previous buttons */
+        .prev, .next, .play {
+            background-color: black;
+            border: none;
+            color: white;
+            padding: 16px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            margin: auto;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        /* Caption text */
+        .text {
+            color: #f2f2f2;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* On smaller screens, decrease text size */
+        @media only screen and (max-width: 300px) {
+            .prev, .next,.text {font-size: 11px}
+        }
+        
+        h2 {
+            text-align: center;
+        }
+        </pre>
+            
+            <b>Step Two: </b> Declare HTML Color and Control Buttons. These will be the clickable buttons to change slideshows or the slides in a slideshow. 
+        <pre>
+            button class="btn1" onclick="changeColor('Platinum'), changeSlide(0)">Platinum Silver
+            button class="btn2" onclick="changeColor('Burgundy'), changeSlide(0)">Burgundy Red
+            button class="btn3" onclick="changeColor('Cobalt'), changeSlide(0)">Cobalt Blue
+            button class="btn4" onclick="changeColor('Gold'), changeSlide(0)">Graphite Gold
+
+            button class="prev" onclick="changeSlide(-1)">Previous Slide
+            button class="play" onclick="startSlideShow()">Play
+            button class="next" onclick="changeSlide(1);">Next Slide
+        </pre>
+        <p>
+            <b> Step Three: </b> Declare a HTML Slideshow Container div. This is where your slideshow will be held. Fill it with the first image you want to be seen when the web page loads. 
+            For this tutorial, two slideshow container divs will be shown to represent two different objects are being returned from the framework. 
+            <pre>
+            div class = slideshow-container >
+
+            img src ="../pics/tutorialpics/Surface-Laptop-Plat1.jpg" id="slideshow" />
+            br />
+
+            img src ="../pics/tutorialpics/Surface-Laptop-Plat1.jpg" id="slideshow2" />
+            br />
+            /div>
+            </pre> 
+        <p>
+            <b> Step Four: </b> Declare the JavaScript slideshow objects and slideshow functions. The slideshow object will take in the slideshow's reference id, starting slideshow pictures for when the web page loads, and the color of the slideshow.
+            The changeSlide function will go to the next or previous slide on button click. The startSlideShow function will make the slideshow play automatically.  Modify the changeColor function and colorArray to your desired colors and slideshow pictures.
+            Note: The slideshowObj.changeColor(slides) is commented because the tutorialFw.js also has a commented out function if you want to place your pictures in the framework itself. 
+            <pre>
+            var colorS;
+            var colorArray = ['Platinum', 'Burgundy', 'Cobalt', 'Gold'];
+            var slidePictures;
+            
+            function changeColor(color) {
+                if (color === colorArray[0]) {
+                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
+                }
+                else if (color === colorArray[1]) {
+                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Burg1.jpg", "../pics/tutorialpics/Surface-Laptop-Burg2.jpg", "../pics/tutorialpics/Surface-Laptop-Burg3.jpg", "../pics/tutorialpics/Surface-Laptop-Burg4.jpg", "../pics/tutorialpics/Surface-Laptop-Burg5.jpg"];
+                }
+                else if (color === colorArray[2]) {
+                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Cob1.jpg", "../pics/tutorialpics/Surface-Laptop-Cob2.jpg", "../pics/tutorialpics/Surface-Laptop-Cob3.jpg", "../pics/tutorialpics/Surface-Laptop-Cob4.jpg", "../pics/tutorialpics/Surface-Laptop-Cob5.jpg"];
+                }
+                else if (color === colorArray[3]) {
+                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Gold1.jpg", "../pics/tutorialpics/Surface-Laptop-Gold2.jpg", "../pics/tutorialpics/Surface-Laptop-Gold3.jpg", "../pics/tutorialpics/Surface-Laptop-Gold4.jpg", "../pics/tutorialpics/Surface-Laptop-Gold5.jpg"];
+                }
+                
+                console.log(slidePictures);
+                colorS = color;
+                slideshowObj.changeColorSlides(slidePictures);
+                
+                /*slideshowObj.changeColor(slides);
+                slideshowObj2.changeColor(slides);*/
+            }
+    
+            var slideshowObj = slideShowFW.makeSlideShow({
+                id: "slideshow",
+                slidePics: slidePictures,
+                color: colorS
+            });
+            
+            var slideshowObj2 = slideShowFW.makeSlideShow({
+                id: "slideshow2",
+                slidePics: slidePictures,
+                color: colorS
+            });
+            
+            
+            function changeSlide(n) {
+                slideshowObj.changeSlide(n);
+                slideshowObj2.changeSlide(n);
+            }
+            
+            function startSlideShow() {
+                slideshowObj.startSlideShow();
+                slideshowObj2.startSlideShow();
+            }
+            
+            console.log(slideshowObj);
+            </pre>
     </body>
 </html>

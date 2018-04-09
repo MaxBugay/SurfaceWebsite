@@ -128,23 +128,20 @@ img {
     border-radius: 10px;
     margin-top: 10px;
 }
-h1, h2 {
+h1, h2, p, a{
     padding: 10px;
     }
-p {
-    padding: 10px;
-}
-
-.codebox {
-        /* Below are styles for the codebox (not the code itself) */
-        border:1px solid black;
-        background-color:#EEEEFF;
-        width:300px;
-        overflow:auto;    
-        padding:10px;
-}
-    .codebox code {
-        /* Styles in here affect the text of the codebox */
-        font-size:0.9em;
-        /* You could also put all sorts of styling here, like different font, color, underline, etc. for the code. */
+    
+pre {
+    margin-bottom:12px;
+    margin-right: 16px;
+    margin-left: 20px;
+    background-color: azure;
+    color: black;
+    border-radius: 4px;
+    box-shadow: 2px 2px #AAAAAA;
+    padding: 0px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    
 }
