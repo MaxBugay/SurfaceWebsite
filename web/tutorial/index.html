@@ -135,24 +135,8 @@ and open the template in the editor.
         }
 
         /* On hover, add a black background color with a little bit see-through */
-        .prev:hover, .next:hover {
+        .prev:hover, .next:hover, .play:hover {
             background-color: rgba(0,0,0,0.8);
-        }
-
-        /* Caption text */
-        .text {
-            color: #f2f2f2;
-            font-size: 15px;
-            padding: 8px 12px;
-            position: absolute;
-            bottom: 8px;
-            width: 100%;
-            text-align: center;
-        }
-
-        /* On smaller screens, decrease text size */
-        @media only screen and (max-width: 300px) {
-            .prev, .next,.text {font-size: 11px}
         }
         
         h2 {
@@ -171,6 +155,8 @@ and open the template in the editor.
             button class="play" onclick="startSlideShow()">Play
             button class="next" onclick="changeSlide(1);">Next Slide
         </pre>
+        <p data-height="265" data-theme-id="0" data-slug-hash="eMxZgZ" data-default-tab="css,result" data-user="MaxBugay" data-embed-version="2" data-pen-title="Color and Control Buttons" class="codepen">See the Pen <a href="https://codepen.io/MaxBugay/pen/eMxZgZ/">Color and Control Buttons</a> by Max (<a href="https://codepen.io/MaxBugay">@MaxBugay</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
         <p>
             <b> Step Three: </b> Declare a HTML Slideshow Container div. This is where your slideshow will be held. Fill it with the first image you want to be seen when the web page loads. 
             For this tutorial, two slideshow container divs will be shown to represent two different objects are being returned from the framework. 
@@ -184,6 +170,8 @@ and open the template in the editor.
             br />
             /div>
             </pre> 
+        <p data-height="265" data-theme-id="0" data-slug-hash="yKZOpe" data-default-tab="js,result" data-user="MaxBugay" data-embed-version="2" data-pen-title="Slideshow" class="codepen">See the Pen <a href="https://codepen.io/MaxBugay/pen/yKZOpe/">Slideshow</a> by Max (<a href="https://codepen.io/MaxBugay">@MaxBugay</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
         <p>
             <b> Step Four: </b> Declare the JavaScript slideshow objects and slideshow functions. The slideshow object will take in the slideshow's reference id, starting slideshow pictures for when the web page loads, and the color of the slideshow.
             The changeSlide function will go to the next or previous slide on button click. The startSlideShow function will make the slideshow play automatically.  Modify the changeColor function and colorArray to your desired colors and slideshow pictures.
@@ -241,7 +229,10 @@ and open the template in the editor.
             
             console.log(slideshowObj);
             </pre>
+        <p data-height="265" data-theme-id="0" data-slug-hash="LdqNdQ" data-default-tab="js,result" data-user="MaxBugay" data-embed-version="2" data-pen-title="Selection Slideshow" class="codepen">See the Pen <a href="https://codepen.io/MaxBugay/pen/LdqNdQ/">Selection Slideshow</a> by Max (<a href="https://codepen.io/MaxBugay">@MaxBugay</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
         <p>
         <b> Try It Yourself: </b> You can now use this framework effectively. If you want to modify it, you can download it <a href="tutorial.zip"> here </a> and read how it was developed with the log <a href="log.html"> here </a>.
+        
     </body>
 </html>
