@@ -82,7 +82,7 @@ and open the template in the editor.
         }
 
         /* Next & previous buttons */
-        .prev, .next, .play {
+        .prev, .next {
             background-color: black;
             border: none;
             color: white;
@@ -94,11 +94,11 @@ and open the template in the editor.
         }
 
         /* On hover, add a black background color with a little bit see-through */
-        .prev:hover, .next:hover, .play:hover{
+        .prev:hover, .next:hover {
             background-color: rgba(0,0,0,0.8);
         }
         
-        h2 {
+        h2, .links {
             text-align: center;
         }
         </style>
@@ -126,6 +126,14 @@ and open the template in the editor.
         </div>
 
         <h2>Tutorial: Selection Slideshow</h2>
+        
+        <div class="links">
+        <a href="tester.html">Click here to see it with a single slideshow that sends pictures to the framework. </a> 
+        <br>
+        <a href="tester3.html">Click here to see it with a multiple slideshows.</a> 
+        <br>
+        <br>
+        </div>
 
         <div class = "ColorButtons"> Color Buttons:
         <button class="btn1" onclick="changeColor('Platinum'), changeSlide(0)">Platinum Silver</button>
@@ -136,16 +144,12 @@ and open the template in the editor.
         
         <div class = "ControlButtons"> Control Buttons:
         <button class="prev" onclick="changeSlide(-1)">Previous Slide</button>
-        <button class="play" onclick="startSlideShow()">Play</button>
         <button class="next" onclick="changeSlide(1);">Next Slide</button>
         </div>
         
         <div class = slideshow-container >
         
         <img src ="../pics/tutorialpics/Surface-Laptop-Plat1.jpg" id="slideshow" />
-        <br />
-        
-        <img src ="../pics/tutorialpics/Surface-Laptop-Plat1.jpg" id="slideshow2" />
         <br />
               
         </div>
@@ -156,9 +160,15 @@ and open the template in the editor.
             var selectedColor;
             var colorArray = ['Platinum', 'Burgundy', 'Cobalt', 'Gold'];
             var slidePictures;
+    
+            var slideshowObj = slideShowFW.makeSlideShow({
+                id: "slideshow",
+                slidePics: slidePictures,
+                color: selectedColor
+            });
             
             function changeColor(color) {
-                if (color === colorArray[0]) {
+                /*if (color === colorArray[0]) {
                     slidePictures = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
                 }
                 else if (color === colorArray[1]) {
@@ -174,36 +184,18 @@ and open the template in the editor.
                 console.log(slidePictures);
                 selectedColor = color;
                 
-                slideshowObj.changeColorSlides(slidePictures);
+                slideshowObj.changeColorSlides(slidePictures);*/
+        
+                slideshowObj.color = color;
+                console.log(slideshowObj.color);
+                slideshowObj.changeColorFW(color);
                 
-                /*slideshowObj.changeColor(slides);
-                slideshowObj2.changeColor(slides);*/
             }
-    
-            var slideshowObj = slideShowFW.makeSlideShow({
-                id: "slideshow",
-                slidePics: slidePictures,
-                color: selectedColor
-            });
-            
-            var slideshowObj2 = slideShowFW.makeSlideShow({
-                id: "slideshow2",
-                slidePics: slidePictures,
-                color: selectedColor
-            });
-            
             
             function changeSlide(n) {
                 slideshowObj.changeSlide(n);
-                slideshowObj2.changeSlide(n);
+                console.log(slideshowObj);
             }
-            
-            function startSlideShow() {
-                slideshowObj.startSlideShow();
-                slideshowObj2.startSlideShow();
-            }
-            
-            console.log(slideshowObj);
             
         </script>
     </body>

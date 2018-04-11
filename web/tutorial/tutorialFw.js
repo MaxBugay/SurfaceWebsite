@@ -4,10 +4,9 @@ var slideShowFW = {};
     
     var slideIndex = 0;
     var slideShow;
-    //var colorArray = ['Platinum', 'Burgundy', 'Cobalt', 'Gold'];
+    var colorArray = ['Platinum', 'Burgundy', 'Cobalt', 'Gold'];
     var slides = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
     var slidesLength = slides.length - 1;
-    var interval;
     
     function $(element) {
         return document.getElementById(element);
@@ -38,12 +37,11 @@ var slideShowFW = {};
         //Changes slideshow to desired color
         slideShow.changeColorSlides = function (colorSlides) {
             slides = colorSlides;
-            imageLength = slides.length - 1;
+            slidesLength = slides.length - 1;
         };
         
-        //The changeColor function was originally part of the framework, but didn't make sense because the user calling it would just get my slideshow's pictures and not their own. It still works, but is commented out so the user can change the images in the html file. 
-        
-        /*slideShow.changeColor = function (color) {
+        //The changeColorFW function is optional if you want to put your pictures in the framework. 
+        slideShow.changeColorFW = function (color) {
             if (color === colorArray[0]) {
                 params.slidePics = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
             }
@@ -57,8 +55,8 @@ var slideShowFW = {};
                 params.slidePics = ["../pics/tutorialpics/Surface-Laptop-Gold1.jpg", "../pics/tutorialpics/Surface-Laptop-Gold2.jpg", "../pics/tutorialpics/Surface-Laptop-Gold3.jpg", "../pics/tutorialpics/Surface-Laptop-Gold4.jpg", "../pics/tutorialpics/Surface-Laptop-Gold5.jpg"];
             }
             slides = params.slidePics;
-            imageLength = slides.length - 1;
-        };*/    
+            slidesLength = slides.length - 1;
+        };    
         
         slideShow.style.textAlign = "center";
         slideShow.style.padding = 10 + "px";
@@ -77,14 +75,9 @@ var slideShowFW = {};
             }
             
             document.getElementById(params.id).src = slides[slideIndex];
+            
         };
         
-        //Auto Play 
-        slideShow.startSlideShow = function() {
-            interval = setInterval("changeSlide(1)", 2000);
-        };
-        
-        console.log(slideShow);
         return slideShow;
     };
 })();

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Tutorial: Selection Slideshow</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../myStyle.css" rel="stylesheet" type="text/css" />
+        <style>
+            
+         .btn1 {
+            background-color: #A2A5AC;
+            border: none;
+            color: black;
+            padding: 16px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            margin: auto;
+        }
+        
+        .btn2 {
+            background-color: #663E3F;
+            border: none;
+            color: black;
+            padding: 16px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            margin: auto;
+        }
+
+        .btn3 {
+            background-color: #4D6977;
+            border: none;
+            color: black;
+            padding: 16px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            margin: auto;
+        }
+
+        .btn4 {
+            background-color: #B4AAA0;
+            border: none;
+            color: black;
+            padding: 16px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            margin: auto;
+        }
+
+        .btn1:hover, .btn2:hover, .btn3:hover, .btn4:hover {
+            border-color: black;
+            border: 1px solid black;
+        }
+        
+        .ColorButtons , .ControlButtons{
+            padding: 10px;
+            margin: 0px auto;
+            text-align: center;
+        }
+
+        .slideshow-container 
+        {
+            width:100%;
+            height:800px;
+            text-align: center;
+        }
+        
+        .slideshow-container img{
+            max-width: 1200px;
+            height: 700px;
+            margin: 0px auto;
+            text-align: center;
+        }
+
+        /* Next & previous buttons */
+        .prev, .next, .play {
+            background-color: black;
+            border: none;
+            color: white;
+            padding: 16px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            margin: auto;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover, .next:hover, .play:hover{
+            background-color: rgba(0,0,0,0.8);
+        }
+        
+        h2, .links {
+            text-align: center;
+        }
+        </style>
+    </head>
+
+    <body>
+        <div id="titleNav">
+
+            <!-- The style sheet has pageTitle floated left -->
+            <div id="pageTitle">
+                Microsoft Surface
+            </div>
+
+            <!-- The style sheet has nav floated right -->
+            <div id="nav">
+                <div><a href="../index.html">Home</a></div>
+                <div><a href="../labs.html">Labs</a></div>
+                <div><a href="../tutorial/index.html">Tutorial</a></div>
+                <div><a href="../angular.html">Angular</a></div>
+            </div>
+
+            <!-- Must stop the floating so that elements below (e.g., content) 
+            don't float up into here. -->
+            <div class="stopFloat"></div>
+        </div>
+
+        <h2>Tutorial: Selection Slideshow</h2>
+        
+        <div class="links">
+        <a href="tester.html">Click here to see it with a single slideshow that sends pictures to the framework. </a> 
+        <br>
+        <a href="tester2.html">Click here to see it with a single slideshow that receives pictures from within the framework.  </a> 
+        <br>
+        <br>
+        </div>
+
+        <div class = "ColorButtons"> Color Buttons:
+        <button class="btn1" onclick="changeColor('Platinum', 'slideshow'), changeSlide(0, 'slideshow')">Platinum Silver</button>
+        <button class="btn2" onclick="changeColor('Burgundy', 'slideshow'), changeSlide(0, 'slideshow')">Burgundy Red</button>
+        <button class="btn3" onclick="changeColor('Cobalt', 'slideshow'), changeSlide(0, 'slideshow')">Cobalt Blue</button>
+        <button class="btn4" onclick="changeColor('Gold', 'slideshow'), changeSlide(0, 'slideshow')">Graphite Gold</button>
+        </div>
+        
+        <div class = "ControlButtons"> Control Buttons:
+        <button class="prev" onclick="changeSlide(-1, 'slideshow')">Previous Slide</button>
+        <button class="next" onclick="changeSlide(1, 'slideshow');">Next Slide</button>
+        </div>
+        
+        <div class = slideshow-container >
+        
+        <img src ="../pics/tutorialpics/Surface-Laptop-Plat1.jpg" id="slideshow" />
+        
+        </div>
+        
+        <div class = "ColorButtons"> Color Buttons:
+        <button class="btn1" onclick="changeColor('Platinum', 'slideshow2'), changeSlide(0, 'slideshow2')">Platinum Silver</button>
+        <button class="btn2" onclick="changeColor('Burgundy', 'slideshow2'), changeSlide(0, 'slideshow2')">Burgundy Red</button>
+        <button class="btn3" onclick="changeColor('Cobalt', 'slideshow2'), changeSlide(0, 'slideshow2')">Cobalt Blue</button>
+        <button class="btn4" onclick="changeColor('Gold', 'slideshow2'), changeSlide(0, 'slideshow2')">Graphite Gold</button>
+        </div>
+        
+        <div class = "ControlButtons"> Control Buttons:
+        <button class="prev" onclick="changeSlide(-1, 'slideshow2')">Previous Slide</button>
+        <button class="next" onclick="changeSlide(1, 'slideshow2');">Next Slide</button>
+        </div>
+        
+        <div class = slideshow-container >
+        
+        <img src ="../pics/tutorialpics/Surface-Laptop-Plat1.jpg" id="slideshow2" />
+              
+        </div>
+        
+        <script src="tutorialFw.js"> </script> 
+        <script>
+            
+            var selectedColor;
+            var colorArray = ['Platinum', 'Burgundy', 'Cobalt', 'Gold'];
+            var slidePictures;
+    
+            var slideshowObj = slideShowFW.makeSlideShow({
+                id: "slideshow",
+                slidePics: slidePictures,
+                color: selectedColor
+            });
+            
+            var slideshowObj2 = slideShowFW.makeSlideShow({
+                id: "slideshow2",
+                slidePics: slidePictures,
+                color: selectedColor
+            });
+            
+            function changeColor(color, id) {
+                
+                if (color === colorArray[0]) {
+                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
+                }
+                else if (color === colorArray[1]) {
+                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Burg1.jpg", "../pics/tutorialpics/Surface-Laptop-Burg2.jpg", "../pics/tutorialpics/Surface-Laptop-Burg3.jpg", "../pics/tutorialpics/Surface-Laptop-Burg4.jpg", "../pics/tutorialpics/Surface-Laptop-Burg5.jpg"];
+                }
+                else if (color === colorArray[2]) {
+                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Cob1.jpg", "../pics/tutorialpics/Surface-Laptop-Cob2.jpg", "../pics/tutorialpics/Surface-Laptop-Cob3.jpg", "../pics/tutorialpics/Surface-Laptop-Cob4.jpg", "../pics/tutorialpics/Surface-Laptop-Cob5.jpg"];
+                }
+                else if (color === colorArray[3]) {
+                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Gold1.jpg", "../pics/tutorialpics/Surface-Laptop-Gold2.jpg", "../pics/tutorialpics/Surface-Laptop-Gold3.jpg", "../pics/tutorialpics/Surface-Laptop-Gold4.jpg", "../pics/tutorialpics/Surface-Laptop-Gold5.jpg"];
+                }
+                
+                //console.log(slidePictures);
+                selectedColor = color;
+                
+                if (id === slideshowObj.id)
+                {
+                    slideshowObj.changeColorSlides(slidePictures);
+                    console.log(slideshowObj.slidePics);
+                }
+                else if (id === slideshowObj2.id)
+                {
+                    slideshowObj2.changeColorSlides(slidePictures);
+                    console.log(slideshowObj2.slidePics);
+                }
+                
+                /*slideshowObj.changeColor(slides);
+                slideshowObj2.changeColor(slides);*/
+            }
+           
+            function changeSlide(n, id) {
+                if (id === slideshowObj.id)
+                {
+                    slideshowObj.changeSlide(n);
+                }
+                else if (id === slideshowObj2.id)
+                {
+                    slideshowObj2.changeSlide(n);
+                }
+                
+                console.log(slideshowObj);
+                console.log(slideshowObj2);
+            }
+            
+        </script>
+    </body>
+</html>
