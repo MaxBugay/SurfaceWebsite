@@ -181,13 +181,15 @@ and open the template in the editor.
             var slideshowObj = slideShowFW.makeSlideShow({
                 id: "slideshow",
                 slidePics: slidePictures,
-                color: selectedColor
+                color: selectedColor,
+                slideIndex: 0
             });
             
             var slideshowObj2 = slideShowFW.makeSlideShow({
                 id: "slideshow2",
                 slidePics: slidePictures,
-                color: selectedColor
+                color: selectedColor,
+                slideIndex: 0
             });
             
             function changeColor(color, id) {
@@ -211,7 +213,6 @@ and open the template in the editor.
                 if (id === slideshowObj.id)
                 {
                     slideshowObj.changeColorSlides(slidePictures);
-                    
                 }
                 else if (id === slideshowObj2.id)
                 {

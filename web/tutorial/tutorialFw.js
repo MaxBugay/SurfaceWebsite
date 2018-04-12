@@ -2,7 +2,6 @@ var slideShowFW = {};
 
 (function () {
     
-    var slideIndex = 0;
     var slideShow;
     var colorArray = ['Platinum', 'Burgundy', 'Cobalt', 'Gold'];
     var slides = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
@@ -36,6 +35,7 @@ var slideShowFW = {};
         
         //Changes slideshow to desired color
         slideShow.changeColorSlides = function (colorSlides) {
+            params.slidePics = colorSlides;
             slides = colorSlides;
             slidesLength = slides.length - 1;
         };
@@ -63,20 +63,21 @@ var slideShowFW = {};
         
         //Next or Previous Slides
         slideShow.changeSlide = function(n) {
-            slideIndex += n;
+            params.slideIndex += n;
             
             //Restart slideshow at end of it
-            if (slideIndex > slidesLength) {
-                slideIndex = 0;
+            if (params.slideIndex > slidesLength) {
+                params.slideIndex = 0;
             }
             //Back on slide 1 to end of array
-            if (slideIndex < 0) {
-                slideIndex = slidesLength;
+            if (params.slideIndex < 0) {
+                params.slideIndex = slidesLength;
             }
             
-            document.getElementById(params.id).src = slides[slideIndex];
+            document.getElementById(params.id).src = params.slidePics[params.slideIndex];
             
         };
+     
         
         return slideShow;
     };
