@@ -23,7 +23,7 @@
         System.out.println("jsonInsertData is " + jsonInsertData);
         errorMsgs.errorMsg = dbc.getErr();
         if (errorMsgs.errorMsg.length() == 0) { // means db connection is ok
-            System.out.println("personInsert.jsp ready to insert");
+            System.out.println("productInsert.jsp ready to insert");
             StringData insertData = gson.fromJson(jsonInsertData, StringData.class);
             errorMsgs = TableMods.insert(insertData, dbc); // this is the form level message
         }

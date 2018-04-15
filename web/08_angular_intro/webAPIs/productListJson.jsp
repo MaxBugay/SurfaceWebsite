@@ -12,7 +12,7 @@
 
     DbConn dbc = new DbConn();
     
-    // buildPersonList will check for db connection errors (and put error message into personList).
+    // buildProductList will check for db connection errors (and put error message into productList).
     StringDataList productList = ProductView.buildProductList(dbc);
 
     // PREVENT DB connection leaks:

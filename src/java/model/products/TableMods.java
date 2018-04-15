@@ -24,7 +24,7 @@ public class TableMods {
 
         StringData errorMsgs = new StringData();
 
-        System.out.println("In InsertUpdate.insert() ready to insert person with these values: " + userData.toString());
+        System.out.println("In InsertUpdate.insert() ready to insert product with these values: " + userData.toString());
 
         errorMsgs = validate(userData);
         System.out.println("In InsertUpdate.insert() finished with validation");
@@ -43,7 +43,7 @@ public class TableMods {
             if (formMsg.length() == 0) { // db connection is good
 
                 // prepare the statement
-                String sql = "INSERT INTO PRODUCTS (PRODUCT_ID, PRODUCT_NAME, RATING) VALUES (?,?,?)";
+                String sql = "INSERT INTO PRODUCTS (PRODUCT_NAME, PRICE, RATING) VALUES (?,?,?)";
 
                 // PrepStatement is Sally's wrapper class for java.sql.PreparedStatement
                 // Only difference is that Sally's class takes care of encoding null 
@@ -51,8 +51,8 @@ public class TableMods {
                 PrepStatement pStatement = new PrepStatement(dbc, sql);
 
                 // Encoding string values into the prepared statement is pretty easy...
-                pStatement.setInt(1, ValidationUtils.integerConversion(userData.PRODUCT_ID));
-                pStatement.setString(2, userData.PRODUCT_NAME);
+                pStatement.setString(1, userData.PRODUCT_NAME);
+                pStatement.setBigDecimal(2, ValidationUtils.decimalConversion(userData.PRICE));
                 pStatement.setInt(3, ValidationUtils.integerConversion(userData.RATING));
 
                 System.out.println("ready to execute insert");
@@ -98,14 +98,14 @@ public class TableMods {
 
         StringData errorMsgs = new StringData();
 
-        System.out.println("In InsertUpdate.update() ready to update person with these values: " + userData.toString());
+        System.out.println("In InsertUpdate.update() ready to update product with these values: " + userData.toString());
 
         if (userData.PRODUCT_ID == null) {
-            errorMsgs.errorMsg = "Programmer error: for update, person Id should not be null.";
+            errorMsgs.errorMsg = "Programmer error: for update, product Id should not be null.";
             return errorMsgs;
         }
         if (userData.PRODUCT_ID.length() == 0) {
-            errorMsgs.errorMsg =  "Programmer error: for update, person Id should not be empty string.";
+            errorMsgs.errorMsg =  "Programmer error: for update, product Id should not be empty string.";
             return errorMsgs;
         }
 
@@ -127,17 +127,17 @@ public class TableMods {
             if (formMsg.length() == 0) { // db connection is good
 
                 // prepare the statement
-                String sql = "UPDATE PRODUCTS SET PRODUCT_ID=?, PRODUCT_NAME=?, RATING=? WHERE PRODUCT_ID=?";
+                String sql = "UPDATE PRODUCTS SET PRODUCT_NAME=?, PRICE=?, RATING=? WHERE PRODUCT_ID=?";
 
                 // PrepStatement is Sally's wrapper class for java.sql.PreparedStatement
                 // Only difference is that Sally's class takes care of encoding null 
                 // when necessary. And it also System.out.prints exception error messages.
                 PrepStatement pStatement = new PrepStatement(dbc, sql);
 
-                pStatement.setInt(1, ValidationUtils.integerConversion(userData.PRODUCT_ID));
-                pStatement.setString(2, userData.PRODUCT_NAME);
+                pStatement.setString(1, userData.PRODUCT_NAME);
+                pStatement.setBigDecimal(2, ValidationUtils.decimalConversion(userData.PRICE));
                 pStatement.setInt(3, ValidationUtils.integerConversion(userData.RATING));
-                //pStatement.setString(4, userData.personId);
+                pStatement.setInt(4, ValidationUtils.integerConversion(userData.PRODUCT_ID));
 
                 System.out.println("ready to execute update, id is " + userData.PRODUCT_ID);
 
@@ -169,13 +169,14 @@ public class TableMods {
 
         // Validation
         errorMsgs.PRODUCT_NAME = ValidationUtils.stringValidationMsg(inputData.PRODUCT_NAME, 45, true);
-        errorMsgs.PRODUCT_ID = ValidationUtils.integerValidationMsg(inputData.PRODUCT_ID, false);
-
-        if (parseInt(inputData.RATING) <= 5 && parseInt(inputData.RATING) >= 0) {
-            errorMsgs.RATING = ValidationUtils.integerValidationMsg(inputData.RATING, false);
+        errorMsgs.PRICE = ValidationUtils.decimalValidationMsg(inputData.PRICE, false);
+        errorMsgs.RATING = ValidationUtils.integerValidationMsg(inputData.RATING, false);
+        
+       /* if (parseInt(inputData.RATING) <= 5 && parseInt(inputData.RATING) >= 0) {
+            inputData.RATING = ValidationUtils.integerValidationMsg(inputData.RATING, false);
         } else {
             errorMsgs.RATING = "Please enter a integer between 0 and 5.";
-        }
+        }*/
         return errorMsgs;
     }
     
@@ -183,10 +184,10 @@ public class TableMods {
     public static String deleteById(String id, DbConn dbc) {
 
         if (id == null) {
-            return "Programmer error: for delete, Person Id should not be null.";
+            return "Programmer error: for delete, product Id should not be null.";
         }
         if (id.length() == 0) {
-            return "Programmer error: for delete, Person Id should not be empty string.";
+            return "Programmer error: for delete, product Id should not be empty string.";
         }
 
         String formMsg = dbc.getErr(); // will be empty string if DB connection is OK.

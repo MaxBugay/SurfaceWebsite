@@ -28,7 +28,7 @@ angApp.controller('contentController', function ($scope, $http) {
                         $scope.products[i].RATING = parseInt($scope.products[i].RATING);
                         $scope.products[i].PRODUCT_ID = parseInt($scope.products[i].PRODUCT_ID);
                     }
-                    $scope.sortField = 'productId';
+                    $scope.sortField = 'PRODUCT_ID';
                 }
             },
             function (response) { // this function will run if http.get error

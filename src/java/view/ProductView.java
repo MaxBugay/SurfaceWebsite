@@ -10,7 +10,7 @@ import model.products.*;
 
 public class ProductView {
 
-    public static StringData extractPerson(ResultSet results) {
+    public static StringData extractProduct(ResultSet results) {
         StringData sd = new StringData();
         try {
             sd.PRODUCT_ID = FormatUtils.formatInteger(results.getObject("PRODUCT_ID"));
@@ -20,7 +20,7 @@ public class ProductView {
             sd.PRICE = FormatUtils.formatDollar(results.getObject("PRICE"));
             sd.RATING = FormatUtils.formatInteger(results.getObject("RATING"));
         } catch (Exception e) {
-            sd.errorMsg = "Data Exception thrown in PersonView.extractPerson(): " + e.getMessage();
+            sd.errorMsg = "Data Exception thrown in ProductView.extractProduct(): " + e.getMessage();
             System.out.println("*****" + sd.errorMsg);
         }
         return sd;
@@ -41,27 +41,27 @@ public class ProductView {
                 ResultSet results = stmt.executeQuery();
 
                 while (results.next()) {
-                    productList.add(extractPerson(results));
+                    productList.add(extractProduct(results));
                 }
             } catch (Exception e) {
-                productList.dbError = "SQL Excepption thrown in PersonView.BuildPersonList(): " + e.getMessage();
+                productList.dbError = "SQL Excepption thrown in ProductView.BuildProductList(): " + e.getMessage();
                 System.out.println("*****" + productList.dbError);
             }
         }
         return productList;
     }
 
-    public static StringData findPersonById(DbConn dbc, String id) {
+    public static StringData findProductById(DbConn dbc, String id) {
 
-        StringData person = new StringData();
+        StringData product = new StringData();
 
         if (id == null) {
-            person.errorMsg = "Cannot find person with null id.";
-            return person;
+            product.errorMsg = "Cannot find product with null id.";
+            return product;
         }
 
-        person.errorMsg = dbc.getErr();
-        if (person.errorMsg.length() == 0) {
+        product.errorMsg = dbc.getErr();
+        if (product.errorMsg.length() == 0) {
 
             String sql = "SELECT PRODUCT_ID, PRODUCT_NAME, RATING, IMAGE_URL "
                     + "FROM PRODUCTS WHERE PRODUCT_ID = ?";
@@ -72,14 +72,14 @@ public class ProductView {
                 ResultSet results = stmt.executeQuery();
 
                 if (results.next()) {
-                    person = extractPerson(results);
+                    product = extractProduct(results);
                 }
             } catch (Exception e) {
-                person.errorMsg = "SQL Exception thrown in PersonView.BuildPerson(): " + e.getMessage();
-                System.out.println("*****" + person.errorMsg);
+                product.errorMsg = "SQL Exception thrown in ProductView.BuildProduct(): " + e.getMessage();
+                System.out.println("*****" + product.errorMsg);
             }
         }
-        return person;
+        return product;
     }
 
 }

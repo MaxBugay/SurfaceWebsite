@@ -10,7 +10,19 @@ public class StringData {
     public String RATING = "";
     public String errorMsg = "";
 
-    int getCharacterCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public StringData() {
+
+    }
+
+    public int getCharacterCount() {
+        String s = this.PRODUCT_ID + this.PRODUCT_NAME + this.PRICE + this.RATING;
+        return s.length();
+    }
+
+    public String toString() {
+        return "PRODUCT_ID:" + this.PRODUCT_ID
+                + ", name:" + this.PRODUCT_NAME
+                + ", price:" + this.PRICE
+                + ", rating:" + this.RATING;
     }
 }

@@ -17,8 +17,8 @@ function ajaxCall(url, successFn, errorFn) {
     } // sendRequest
 
     function handleResponse() {
-        if (httpReq.readyState == 4) {
-            if (httpReq.status == 200) {
+        if (httpReq.readyState === 4) {
+            if (httpReq.status === 200) {
                 console.log("Ajax success: response text is "+httpReq.responseText);
                 var json = "(" + httpReq.responseText + ")";
                 var object = eval(json);
