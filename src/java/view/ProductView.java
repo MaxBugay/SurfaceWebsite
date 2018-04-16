@@ -33,13 +33,14 @@ public class ProductView {
         productList.dbError = dbc.getErr();
         if (productList.dbError.length() == 0) {
 
-            String sql = "SELECT PRODUCT_ID, PRODUCT_NAME, RATING, IMAGE_URL"
-                    + "FROM PRODUCTS ORDER BY PRODUCT_NAME, PRODUCT_ID";
+            String sql = "SELECT * "
+                    + " FROM PRODUCTS ORDER BY PRODUCT_ID, PRODUCT_NAME";
 
             try {
                 PreparedStatement stmt = dbc.getConn().prepareStatement(sql);
                 ResultSet results = stmt.executeQuery();
-
+                System.out.println(results);
+                
                 while (results.next()) {
                     productList.add(extractProduct(results));
                 }
@@ -63,7 +64,7 @@ public class ProductView {
         product.errorMsg = dbc.getErr();
         if (product.errorMsg.length() == 0) {
 
-            String sql = "SELECT PRODUCT_ID, PRODUCT_NAME, RATING, IMAGE_URL "
+            String sql = "SELECT PRODUCT_ID, PRODUCT_NAME, PRICE, RATING, IMAGE_URL "
                     + "FROM PRODUCTS WHERE PRODUCT_ID = ?";
 
             try {
@@ -81,5 +82,4 @@ public class ProductView {
         }
         return product;
     }
-
 }
