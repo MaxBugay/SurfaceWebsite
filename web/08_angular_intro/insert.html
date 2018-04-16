@@ -21,12 +21,17 @@
 
             <table>
                 <tr>
-                    <td class="fieldName">Name</td>
+                    <td class="fieldName">Product Name</td>
                     <td><input type="text" id="PRODUCT_NAME"></td>
                     <td class="fieldError" id="nameError"></td>
                 </tr>
                 <tr>
-                    <td class="fieldName">Price</td>
+                    <td class="fieldName">Product Link</td>
+                    <td><input type="text" id="PRODUCT_URL"></td>
+                    <td class="fieldError" id="urlError"></td>
+                </tr>
+                <tr>
+                    <td class="fieldName">Price $</td>
                     <td><input type="text" id="PRICE"></td>
                     <td class="fieldError" id="priceError"></td>
                 </tr>
@@ -57,6 +62,7 @@
                             function insertSave() {
                                 var newproduct = {
                                     PRODUCT_NAME: my$("PRODUCT_NAME").value,
+                                    PRODUCT_URL: my$("PRODUCT_URL").value,
                                     PRICE: my$("PRICE").value,
                                     RATING: my$("RATING").value
                                 };
@@ -68,6 +74,7 @@
                                         function (response) { // success function
                                             // write the field level validation messages on the page
                                             my$("nameError").innerHTML = response.name;
+                                            my$("urlError").innerHTML = response.url;
                                             my$("priceError").innerHTML = response.price;
                                             my$("ratingError").innerHTML = response.rating;
                                             my$("formMsg").innerHTML = response.errorMsg;
