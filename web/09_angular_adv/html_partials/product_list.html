@@ -1,0 +1,23 @@
+<div ng-controller="productListController"> 
+
+<h1>Product List</h1>
+<hr><br>
+
+<table>
+    <tr>
+        <th><a href="" ng-click="sortField = 'PRODUCT_ID'; reverse = !reverse">ID <img src="sortUpDown16.png"></a></th>
+        <th><a href="" ng-click="sortField = 'PRODUCT_NAME'; reverse = !reverse">Product Name <img src="sortUpDown16.png"></a></th>
+        <th><a href="" ng-click="sortField = 'PRICE'; reverse = !reverse">Price <img src="sortUpDown16.png"></a></th>
+        <th><a href="" ng-click="sortField = 'RATING'; reverse = !reverse">Rating <img src="sortUpDown16.png"></a></th>
+        <th><a href="" ng-click="sortField = 'IMAGE_URL'; reverse = !reverse">Product <img src="sortUpDown16.png"></a></th>
+    </tr>
+    <tr ng-repeat="product in products | filter:query | orderBy:sortField:reverse">
+        <td><a href="#/list/{{product.PRODUCT_ID}}"></a></td>
+        <td>{{product.PRODUCT_NAME}}</td>
+        <td>{{product.PRICE}}</td>
+        <td>{{product.RATING}}</td>
+        <td><img src="{{product.IMAGE_URL}}"></td>
+    </tr>
+</table>
+
+

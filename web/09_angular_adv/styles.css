@@ -1,0 +1,73 @@
+body {
+    font-family: "Segoe UI", "Segoe UI", serif;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    background-color: lightsteelblue;
+}
+#titleNav {
+    font-family: "Segoe UI", "Segoe UI", serif;
+    width:100%;
+    background-color: midnightblue; /*#DBCD38;/*#CCCCFF;*/
+    border: azure;
+    min-height: 49px;
+    box-sizing: border-box;
+}
+
+#nav {
+    float:right;
+}
+.navLink {
+    background-color: azure;
+    font-size: 16px;
+    padding: 13px;
+    margin-left: 4px;
+    float:left;
+    box-sizing: border-box;
+}
+.navLink a {
+    text-decoration: none;
+}
+
+#title{
+    float:left;
+    font-size: 28px;
+    padding: 2px;
+    padding-left:8px;
+    box-sizing: border-box;
+}
+#contentArea {
+    color: white;
+    padding: 12px;
+}
+
+th, .fieldName {
+    background-color:midnightblue;
+    padding: 3px 6px;
+}
+
+th a, .fieldName {
+    color:white;
+    text-decoration: none;
+}
+.fieldName {
+    text-align: left;
+    padding-right: 1ex;
+}
+.fieldValue {
+    min-width: 20ex;
+}
+.fieldError {
+    color: red;
+    font-size: 0.8em;
+}
+td {
+    background-color: midnightblue;
+    color: azure;
+    padding: 6px 6px; /* top/bottom then left/right */
+}
+
+li {
+    line-height: 1.4em;
+    margin-left: -12px;
+}

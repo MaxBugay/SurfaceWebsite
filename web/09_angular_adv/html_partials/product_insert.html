@@ -1,0 +1,33 @@
+<br><br><br>
+<h1>Product Insert</h1>
+<hr><br><br><br>
+<table id="gray">
+    <tr>
+        <th class="fieldName">Product Name</th>
+        <td><input type="text" ng-model="newproduct.PRODUCT_NAME"></td>
+        <td class="fieldError">{{myErrors.PRODUCT_NAME}}</td>
+    </tr>
+    <tr>
+        <th class="fieldName">Product Link</th>
+        <td><input type="text" ng-model="newproduct.PRODUCT_URL"></td>
+        <td class="fieldError">{{myErrors.PRODUCT_URL}}</td>
+    </tr>
+    <tr>
+        <th class="fieldName">Price $</th>
+        <td><input type="text" ng-model="newproduct.PRICE"></td>
+        <td class="fieldError">{{myErrors.PRICE}}</td>
+    </tr>
+    <tr>
+        <th class="fieldName">Rating</th>
+        <td><input type="text" ng-model="newproduct.RATING"></td>
+        <td class="fieldError">{{myErrors.RATING}}</td>
+    </tr>
+</table>
+
+<p class="fieldName">
+    <input type="button" value="Insert Save"  data-ng-click="insertSave()">
+</p>
+
+<p id="message">
+    &nbsp;&nbsp;&nbsp;{{status}}
+</p>

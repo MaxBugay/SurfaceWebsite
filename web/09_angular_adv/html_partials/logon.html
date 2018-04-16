@@ -1,0 +1,25 @@
+<h1>Login</h1>
+<hr>
+
+<table>
+    <tr>
+        <td>Email</td>
+        <td>
+            <input type="text" name="email" ng-model="person.CUSTOMER_EMAIL"/>   
+        </td>
+    </tr>
+    <tr>
+        <td>Password</td>
+        <td>
+            <input type="password" name="password" ng-model="person.CUSTOMER_PASSWORD"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="submit" value="Log in" data-ng-click="login()"/>
+        </td>
+        <td>
+            <span class="message">{{loginResult}}</span>
+        </td>
+    </tr>
+</table>
