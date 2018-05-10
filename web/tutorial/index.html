@@ -34,13 +34,7 @@ and open the template in the editor.
 
         <h2>Tutorial: Selection Slideshow</h2>
         
-        <a href="tester.html">Click here to view the Selection Slideshow in action. </a> 
-        <br>
-        
-        <a href="tester2.html">Click here to see it with a single slideshow that receives pictures from within the framework. </a> 
-        <br>
-        
-        <a href="tester3.html">Click here to see it with a multiple slideshows. </a> 
+        <a href="tester.html">Click here to view the Selection Slideshow in action with multiple slideshows. </a> 
         <br>
         
         <a href="tutorialFw.js">Click here to view the Selection Slideshow's Framework. </a> 
@@ -129,7 +123,7 @@ and open the template in the editor.
         }
 
         /* Next & previous buttons */
-        .prev, .next, .play {
+        .prev, .next {
             background-color: black;
             border: none;
             color: white;
@@ -141,7 +135,7 @@ and open the template in the editor.
         }
 
         /* On hover, add a black background color with a little bit see-through */
-        .prev:hover, .next:hover, .play:hover {
+        .prev:hover, .next:hover {
             background-color: rgba(0,0,0,0.8);
         }
         
@@ -150,18 +144,18 @@ and open the template in the editor.
         }
         </pre>
         <p>    
-            <b>Step Two: </b> Declare HTML Color and Control Buttons. These will be the clickable buttons to change slideshows or the slides in a slideshow. 
+            <b>Step Two: </b> Declare HTML Color and Control Buttons. These will be the clickable buttons to change slideshowObj's color or the nested slides in that slideshow's chosen color.  
         <pre>
             div class = "ColorButtons"> Color Buttons:
-        button class="btn1" onclick="changeColor('Platinum', 'slideshow'), changeSlide(0, 'slideshow')">Platinum Silver</button>
-        button class="btn2" onclick="changeColor('Burgundy', 'slideshow'), changeSlide(0, 'slideshow')">Burgundy Red</button>
-        button class="btn3" onclick="changeColor('Cobalt', 'slideshow'), changeSlide(0, 'slideshow')">Cobalt Blue</button>
-        button class="btn4" onclick="changeColor('Gold', 'slideshow'), changeSlide(0, 'slideshow')">Graphite Gold</button>
+        button class="btn1" onclick="slideshowObj.setColor('Platinum'), slideshowObj.changeSlide(0)">Platinum Silver /button>
+        button class="btn2" onclick="slideshowObj.setColor('Burgundy'), slideshowObj.changeSlide(0)">Burgundy Red /button>
+        button class="btn3" onclick="slideshowObj.setColor('Cobalt'), slideshowObj.changeSlide(0)">Cobalt Blue /button>
+        button class="btn4" onclick="slideshowObj.setColor('Gold'), slideshowObj.changeSlide(0)">Graphite Gold /button>
         /div>
         
         div class = "ControlButtons"> Control Buttons:
-        button class="prev" onclick="changeSlide(-1, 'slideshow')">Previous Slide</button>
-        button class="next" onclick="changeSlide(1, 'slideshow');">Next Slide</button>
+        button class="prev" onclick="slideshowObj.changeSlide(-1)">Previous Slide /button>
+        button class="next" onclick="slideshowObj.changeSlide(1);">Next Slide /button>
         /div>
         </pre>
         <p data-height="265" data-theme-id="0" data-slug-hash="eMxZgZ" data-default-tab="css,result" data-user="MaxBugay" data-embed-version="2" data-pen-title="Color and Control Buttons" class="codepen">See the Pen <a href="https://codepen.io/MaxBugay/pen/eMxZgZ/">Color and Control Buttons</a> by Max (<a href="https://codepen.io/MaxBugay">@MaxBugay</a>) on <a href="https://codepen.io">CodePen</a>.</p>
@@ -179,57 +173,21 @@ and open the template in the editor.
         <p data-height="265" data-theme-id="0" data-slug-hash="yKZOpe" data-default-tab="js,result" data-user="MaxBugay" data-embed-version="2" data-pen-title="Slideshow" class="codepen">See the Pen <a href="https://codepen.io/MaxBugay/pen/yKZOpe/">Slideshow</a> by Max (<a href="https://codepen.io/MaxBugay">@MaxBugay</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
         <p>
-            <b> Step Four: </b> Declare the JavaScript slideshow objects and slideshow functions. The slideshow object will take in the slideshow's reference id, starting slideshow pictures for when the web page loads, and the color of the slideshow.
-            The changeSlide function will go to the next or previous slide on button click. The startSlideShow function will make the slideshow play automatically.  Modify the changeColor function and colorArray to your desired colors and slideshow pictures.
-            Note: The slideshowObj.changeColor(slides) is commented because the tutorialFw.js also has a commented out function if you want to place your pictures in the framework itself. 
+            <b> Step Four: </b> Declare the JavaScript slideshow objects and slideshow functions. First, the slideshow object will take in the slideshow's reference id to know where to place the slides. Second, the slideshow object will take in a slideIndex initialized at 0, 
+            so each slideshow will have their own index if you choose to have multiple slideshows. Third, the slideshow object will take in the slidePics array, which will have the colors with the a nested array of the slides associated with the chosen color.
+            Thus, when the color button is clicked or the color is chosen, the framework will iterate and produce a slideshow based on nested array's colored pictures. 
             <pre>
-            var selectedColor;
-            var colorArray = ['Platinum', 'Burgundy', 'Cobalt', 'Gold'];
-            var slidePictures;
-    
+
             var slideshowObj = slideShowFW.makeSlideShow({
                 id: "slideshow",
-                slidePics: slidePictures,
-                color: selectedColor,
-                slideIndex: 0
+                slideIndex: 0,
+                slidePics: [
+                    {"color": "Platinum", "slides": ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"] },
+                    {"color": "Burgundy", "slides": ["../pics/tutorialpics/Surface-Laptop-Burg1.jpg", "../pics/tutorialpics/Surface-Laptop-Burg2.jpg", "../pics/tutorialpics/Surface-Laptop-Burg3.jpg", "../pics/tutorialpics/Surface-Laptop-Burg4.jpg", "../pics/tutorialpics/Surface-Laptop-Burg5.jpg"] },
+                    {"color": "Cobalt", "slides": ["../pics/tutorialpics/Surface-Laptop-Cob1.jpg", "../pics/tutorialpics/Surface-Laptop-Cob2.jpg", "../pics/tutorialpics/Surface-Laptop-Cob3.jpg", "../pics/tutorialpics/Surface-Laptop-Cob4.jpg", "../pics/tutorialpics/Surface-Laptop-Cob5.jpg"] },
+                    {"color": "Gold", "slides": ["../pics/tutorialpics/Surface-Laptop-Gold1.jpg", "../pics/tutorialpics/Surface-Laptop-Gold2.jpg", "../pics/tutorialpics/Surface-Laptop-Gold3.jpg", "../pics/tutorialpics/Surface-Laptop-Gold4.jpg", "../pics/tutorialpics/Surface-Laptop-Gold5.jpg"] },
+                ]
             });
-            
-            function changeColor(color, id) {
-                
-                if (color === colorArray[0]) {
-                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
-                }
-                else if (color === colorArray[1]) {
-                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Burg1.jpg", "../pics/tutorialpics/Surface-Laptop-Burg2.jpg", "../pics/tutorialpics/Surface-Laptop-Burg3.jpg", "../pics/tutorialpics/Surface-Laptop-Burg4.jpg", "../pics/tutorialpics/Surface-Laptop-Burg5.jpg"];
-                }
-                else if (color === colorArray[2]) {
-                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Cob1.jpg", "../pics/tutorialpics/Surface-Laptop-Cob2.jpg", "../pics/tutorialpics/Surface-Laptop-Cob3.jpg", "../pics/tutorialpics/Surface-Laptop-Cob4.jpg", "../pics/tutorialpics/Surface-Laptop-Cob5.jpg"];
-                }
-                else if (color === colorArray[3]) {
-                    slidePictures = ["../pics/tutorialpics/Surface-Laptop-Gold1.jpg", "../pics/tutorialpics/Surface-Laptop-Gold2.jpg", "../pics/tutorialpics/Surface-Laptop-Gold3.jpg", "../pics/tutorialpics/Surface-Laptop-Gold4.jpg", "../pics/tutorialpics/Surface-Laptop-Gold5.jpg"];
-                }
-                
-                //console.log(slidePictures);
-                selectedColor = color;
-                
-                if (id === slideshowObj.id)
-                {
-                    slideshowObj.changeColorSlides(slidePictures);
-                }
-                
-                console.log(selectedColor);
-                //slideshowObj.changeColor(slides);
-            }
-           
-            function changeSlide(n, id) {
-                if (id === slideshowObj.id)
-                {
-                    slideshowObj.changeSlide(n);
-                }
-                
-                console.log(slideshowObj);
-                //console.log(slideshowObj2);
-            }
             </pre>
         <p data-height="265" data-theme-id="0" data-slug-hash="LdqNdQ" data-default-tab="js,result" data-user="MaxBugay" data-embed-version="2" data-pen-title="Selection Slideshow" class="codepen">See the Pen <a href="https://codepen.io/MaxBugay/pen/LdqNdQ/">Selection Slideshow</a> by Max (<a href="https://codepen.io/MaxBugay">@MaxBugay</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
