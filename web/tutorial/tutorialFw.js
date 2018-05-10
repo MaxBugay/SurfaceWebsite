@@ -4,8 +4,8 @@ var slideShowFW = {};
     
     var slideShow;
     var colorArray = ['Platinum', 'Burgundy', 'Cobalt', 'Gold'];
-    var slides = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
-    var slidesLength = slides.length - 1;
+    //var slides = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
+    var slidesLength = 0;
     
     function $(element) {
         return document.getElementById(element);
@@ -29,19 +29,32 @@ var slideShowFW = {};
         }
         
         //Default to Platinum Slides if none are passed
-        if (!params.slidePics || !Array.isArray(params.slidePics)) {
-            params.slidePics = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
-        }
+        //if (!params.slidePics || !Array.isArray(params.slidePics)) {
+            //params.slidePics = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
+        //}
         
         //Changes slideshow to desired color
-        slideShow.changeColorSlides = function (colorSlides) {
-            params.slidePics = colorSlides;
-            slides = colorSlides;
-            slidesLength = slides.length - 1;
+       slideShow.setColor = function(color) {
+            //params.slidePics = colorSlides;
+            for (i = 0; i < params.slidePics.length; i++) {
+                if (params.slidePics[i] === color)
+                {
+                    //console.log()
+                    params.slideIndex = i + 1;
+                    console.log(params.slidePics[i]);
+                    console.log(params.slideIndex);
+                    document.getElementById(params.id).src = params.slidePics[params.slideIndex];
+                }
+            }
+            slides = color;
+            slidesLength = params.slidePics.length - 1;
+            //console.log(params.slidePics);
+            //console.log(slides);
+            //console.log(slidesLength);
         };
         
         //The changeColorFW function is optional if you want to put your pictures in the framework. 
-        slideShow.changeColorFW = function (color) {
+        /*slideShow.changeColorFW = function (color) {
             if (color === colorArray[0]) {
                 params.slidePics = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
             }
@@ -56,7 +69,7 @@ var slideShowFW = {};
             }
             slides = params.slidePics;
             slidesLength = slides.length - 1;
-        };    
+        };  */  
         
         slideShow.style.textAlign = "center";
         slideShow.style.padding = 10 + "px";

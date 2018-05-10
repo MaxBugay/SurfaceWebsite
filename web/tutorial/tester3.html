@@ -136,15 +136,15 @@ and open the template in the editor.
         </div>
 
         <div class = "ColorButtons"> Color Buttons:
-        <button class="btn1" onclick="changeColor('Platinum', 'slideshow'), changeSlide(0, 'slideshow')">Platinum Silver</button>
-        <button class="btn2" onclick="changeColor('Burgundy', 'slideshow'), changeSlide(0, 'slideshow')">Burgundy Red</button>
-        <button class="btn3" onclick="changeColor('Cobalt', 'slideshow'), changeSlide(0, 'slideshow')">Cobalt Blue</button>
-        <button class="btn4" onclick="changeColor('Gold', 'slideshow'), changeSlide(0, 'slideshow')">Graphite Gold</button>
+        <button class="btn1" onclick="slideshowObj.setColor('Platinum'), slideshowObj.changeSlide(0)">Platinum Silver</button>
+        <button class="btn2" onclick="slideshowObj.setColor('Burgundy'), slideshowObj.changeSlide(0)">Burgundy Red</button>
+        <button class="btn3" onclick="slideshowObj.setColor('Cobalt'), slideshowObj.changeSlide(0)">Cobalt Blue</button>
+        <button class="btn4" onclick="slideshowObj.setColor('Gold'), slideshowObj.changeSlide(0)">Graphite Gold</button>
         </div>
         
         <div class = "ControlButtons"> Control Buttons:
-        <button class="prev" onclick="changeSlide(-1, 'slideshow')">Previous Slide</button>
-        <button class="next" onclick="changeSlide(1, 'slideshow');">Next Slide</button>
+        <button class="prev" onclick="slideshowObj.changeSlide(-1, 'slideshow')">Previous Slide</button>
+        <button class="next" onclick="slideshowObj.changeSlide(1, 'slideshow');">Next Slide</button>
         </div>
         
         <div class = slideshow-container >
@@ -152,6 +152,8 @@ and open the template in the editor.
         <img src ="../pics/tutorialpics/Surface-Laptop-Plat1.jpg" id="slideshow" />
         
         </div>
+        
+        <!--</div>
         
         <div class = "ColorButtons"> Color Buttons:
         <button class="btn1" onclick="changeColor('Platinum', 'slideshow2'), changeSlide(0, 'slideshow2')">Platinum Silver</button>
@@ -169,15 +171,20 @@ and open the template in the editor.
         
         <img src ="../pics/tutorialpics/Surface-Laptop-Plat1.jpg" id="slideshow2" />
               
-        </div>
+        </div>-->
         
         <script src="tutorialFw.js"> </script> 
         <script>
             
             var selectedColor;
             var colorArray = ['Platinum', 'Burgundy', 'Cobalt', 'Gold'];
-            var slidePictures;
-    
+            var slidePictures = ["Platinum","../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg", 
+                "Burgundy", "../pics/tutorialpics/Surface-Laptop-Burg1.jpg", "../pics/tutorialpics/Surface-Laptop-Burg2.jpg", "../pics/tutorialpics/Surface-Laptop-Burg3.jpg", "../pics/tutorialpics/Surface-Laptop-Burg4.jpg", "../pics/tutorialpics/Surface-Laptop-Burg5.jpg",
+                "Cobalt", "../pics/tutorialpics/Surface-Laptop-Cob1.jpg", "../pics/tutorialpics/Surface-Laptop-Cob2.jpg", "../pics/tutorialpics/Surface-Laptop-Cob3.jpg", "../pics/tutorialpics/Surface-Laptop-Cob4.jpg", "../pics/tutorialpics/Surface-Laptop-Cob5.jpg",
+                "Gold", "../pics/tutorialpics/Surface-Laptop-Gold1.jpg", "../pics/tutorialpics/Surface-Laptop-Gold2.jpg", "../pics/tutorialpics/Surface-Laptop-Gold3.jpg", "../pics/tutorialpics/Surface-Laptop-Gold4.jpg", "../pics/tutorialpics/Surface-Laptop-Gold5.jpg"];
+            
+            console.log(slidePictures);
+            
             var slideshowObj = slideShowFW.makeSlideShow({
                 id: "slideshow",
                 slidePics: slidePictures,
@@ -185,16 +192,16 @@ and open the template in the editor.
                 slideIndex: 0
             });
             
-            var slideshowObj2 = slideShowFW.makeSlideShow({
+            /*var slideshowObj2 = slideShowFW.makeSlideShow({
                 id: "slideshow2",
                 slidePics: slidePictures,
                 color: selectedColor,
                 slideIndex: 0
-            });
+            });*/
             
-            function changeColor(color, id) {
+            function changeColor(color) {
                 
-                if (color === colorArray[0]) {
+                /*if (color === colorArray[0]) {
                     slidePictures = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
                 }
                 else if (color === colorArray[1]) {
@@ -205,7 +212,7 @@ and open the template in the editor.
                 }
                 else if (color === colorArray[3]) {
                     slidePictures = ["../pics/tutorialpics/Surface-Laptop-Gold1.jpg", "../pics/tutorialpics/Surface-Laptop-Gold2.jpg", "../pics/tutorialpics/Surface-Laptop-Gold3.jpg", "../pics/tutorialpics/Surface-Laptop-Gold4.jpg", "../pics/tutorialpics/Surface-Laptop-Gold5.jpg"];
-                }
+                }*/
                 
                 //console.log(slidePictures);
                 selectedColor = color;
@@ -239,5 +246,5 @@ and open the template in the editor.
             }
             
         </script>
-    </body>
+        </body>
 </html>
