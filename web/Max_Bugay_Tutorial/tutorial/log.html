@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Tutorial Log</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../myStyle.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="titleNav">
+
+            <!-- The style sheet has pageTitle floated left -->
+            <div id="pageTitle">
+                Microsoft Surface
+            </div>
+
+            <!-- The style sheet has nav floated right -->
+            <div id="nav">
+                <div><a href="../index.html">Home</a></div>
+                <div><a href="../labs.html">Labs</a></div>
+                <div><a href="tester.html">Tutorial</a></div>
+                <div><a href="../angular.html">Angular</a></div>
+            </div>
+
+            <!-- Must stop the floating so that elements below (e.g., content) 
+            don't float up into here. -->
+            <div class="stopFloat"></div>
+        </div>
+            <h2>Tutorial: Selection Slideshow</h2>
+            
+             <p>
+                This framework will allow you to click on a selected color button and call the specific sets of slides of the color's value. This log will provide a detailed understanding of how it was developed.
+            <br>
+            
+            <p>
+            <b> Framework Variables:  </b> slideIndex is the value the slides is on, slideShow is the id, colorArray is commented out for the option of using the commented out changeColor below, slides are an array defaulted to platinum, slideLength is to loop back at the end of slideshow on next or prev click, and interval is a timer for the play button.
+            <pre>
+                var slideShowFW = {};
+
+                (function () {
+    
+                var slideShow;
+                var slidesLength = 0;
+    
+                function $(element) {
+                    return document.getElementById(element);
+                }
+            </pre> 
+            <p>
+            <b> Making the Slideshow and checking parameters: </b> This will make the slideshow based on the parameters passed and check if they are valid. Defaults are also set if nothing is passed or on load. 
+            <pre>
+                slideShowFW.makeSlideShow = function (params) {
+        
+                //Checks parameters
+                if (!params || !params.id) {
+                     alert("makeSlideShow must be passed an object with 'id' property.");
+                     return;
+                }
+        
+                slideShow = $(params.id);
+        
+                //Checks id
+                if (!slideShow) {
+                    alert("makeSlideShow must be passed an object with an 'id' property " +
+                            "that references an HTML element.");
+                    return;
+                }
+        
+                //Default to Platinum Slides if none are passed
+                if (!params.slidePics || !Array.isArray(params.slidePics)) {
+                    params.slidePics = ["../pics/tutorialpics/Surface-Laptop-Plat1.jpg", "../pics/tutorialpics/Surface-Laptop-Plat2.jpg", "../pics/tutorialpics/Surface-Laptop-Plat3.jpg", "../pics/tutorialpics/Surface-Laptop-Plat4.jpg", "../pics/tutorialpics/Surface-Laptop-Plat5.jpg"];
+                }
+        
+                //Default to Platinum Slides on load
+                slidesLength = params.slidePics[0].slides.length - 1;
+                params.color = "Platinum";
+
+            </pre>
+            <p>
+            <b> Changing slideshows to desired color slideshow: </b> setColor will check your JSON object from the HTML file for the color picked from the button click. This will set the slidePics array to the chosen color and increment through the pictures of the nested array of slides.
+            Upon setting the color, it will also reset the slideshow to the beginning of the nested array.
+            <pre>
+                slideShow.setColor = function(color) {
+                params.color = color;
+                //console.log(params.slideIndex);
+                for (i = 0; i < params.slidePics.length; i++)
+                {
+                    if (params.slidePics[i].color === color)
+                    {
+                        slidesLength = params.slidePics[i].slides.length - 1;
+                        params.slideIndex = 0;
+                        console.log(slidesLength);
+                        console.log(params.slidePics[i].slides);
+                        console.log(params.slideIndex);
+                        document.getElementById(params.id).src = params.slidePics[i].slides[params.slideIndex];
+                    }
+                }
+            };
+
+            </pre>
+            <p>
+            <b> Incrementing and Decrementing Slides: </b> This will increase or decrease the params.slideIndex based on the value of n through your nested slides array. If you increase at the end of the nested array, it will return to the start of it or if you decrease at the beginning of the nested array, it will take you to the end of it. 
+                Lastly, it will update the source picture in the slideshow.
+            <pre>
+                slideShow.style.textAlign = "center";
+                slideShow.style.padding = 10 + "px";
+        
+                //Next or Previous Slides
+                slideShow.changeSlide = function(n) {
+            
+                params.slideIndex += n;
+                console.log(params.slideIndex);
+            
+                //Restart slideshow at end of it
+                if (params.slideIndex > slidesLength) {
+                    params.slideIndex = 0;
+                }
+                //Back on slide 1 to end of array
+                if (params.slideIndex < 0) {
+                    params.slideIndex = slidesLength;
+                }
+                for (i = 0; i < params.slidePics.length; i++)
+                {
+                    if (params.slidePics[i].color === params.color)
+                    {
+                        document.getElementById(params.id).src = params.slidePics[i].slides[params.slideIndex];
+                    }
+                }
+        };
+
+        return slideShow;
+            </pre>
+            <p>
+    </body>
+</html>
